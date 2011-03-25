@@ -7,8 +7,11 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div id="container">
+		<% if notice.present? %><p class="notice"><%= notice %></p><% end %>
+		<% if alert.present? %><p class="alert"><%= alert %></p><% end %>
+		<%= link_to 'Logout', destroy_user_session_path %>
+		<%= yield %>
+	</div>
 </body>
 </html>

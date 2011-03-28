@@ -1,4 +1,6 @@
 HomeworkNotifier::Application.routes.draw do
+  resources :students
+
   root :to => 'groups#index'
 	resources :groups
 

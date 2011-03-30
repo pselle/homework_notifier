@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @student.name %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= @student.phone_number %>
+</p>
+
+<p>
+  <b>Groups:</b>
+  <%= @student.groups.map {|g| link_to g.description, g,:escape=>false}*', ' %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

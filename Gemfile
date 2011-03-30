@@ -8,7 +8,9 @@ gem 'rails', '3.0.5'
 gem 'sqlite3'
 gem "compass", ">= 0.10.6"
 gem "devise"
-
+group :test, :development do
+  gem "rspec-rails", "~> 2.4"
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

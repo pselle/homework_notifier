@@ -69,4 +69,11 @@ class GroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  #for now, acts more like 'add members'
+  def update_memberships
+    raise NotImplementedError
+  end
+  def get_memberships
+    raise NotImplementedError
+  end
 end

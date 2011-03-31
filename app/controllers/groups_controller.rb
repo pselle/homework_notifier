@@ -73,11 +73,17 @@ class GroupsController < ApplicationController
   def update_memberships
     @group = Group.find(params[:id])
 
-    @group.students += params[:students].map {|student_params| Student.find_or_create_by_phone_number(student_params)}
+    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
 
     respond_to do |format|
-      #format.html {render :action=>"edit_memberships"}
-      #format.xml  {head "ok"}
+      if (@students.all?(&:valid?) && @students.all?(&:save) && @group.students += @students)
+        #it succeeded
+        format.html { redirect_to :edit_memberships_of_group, :notice=>"#{@students.count} students added successfully"}
+        format.xml  {head "ok"}
+      else
+        format.html {render :action=>:edit_memberships}
+        format.xml  { render :xml => @students.map(&:errors), :status => :unprocessable_entity }
+      end
     end
   end
   def edit_memberships

@@ -10,6 +10,8 @@ gem "compass", ">= 0.10.6"
 gem "devise"
 group :test, :development do
   gem "rspec-rails", "~> 2.4"
+  gem "factory_girl_rails"
+  gem "simplecov"
 end
 
 # Use unicorn as the web server

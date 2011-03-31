@@ -32,4 +32,7 @@ HomeworkNotifier::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  PHONE_FORMAT=/^\(\d{3}\) \d{3}-\d{4}$/
+  PHONE_FORMAT_MESSAGE="phone number must be 10 digits, and of the form '(xxx) xxx-xxxx'"
+
 end

@@ -2,13 +2,18 @@ HomeworkNotifier::Application.routes.draw do
   resources :students
 
   root :to => 'groups#index'
-	resources :groups
+  resources :groups do
+    member do
+      get "edit_memberships", :as=>:edit_memberships_of
+      put "update_memberships", :as=>:update_memberships_of
+    end
+  end
 
   # devise_for :users
   devise_for :users, :path => "users", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }	
-	# devise_for :admins, :controllers => { :sessions => "admins/sessions" }
-	
-	# The priority is based upon order of creation:
+  # devise_for :admins, :controllers => { :sessions => "admins/sessions" }
+
+  # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:

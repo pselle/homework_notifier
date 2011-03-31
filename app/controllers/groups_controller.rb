@@ -74,9 +74,10 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
-
+    
     respond_to do |format|
-      if (@students.all?(&:valid?) && @students.all?(&:save) && @group.students += @students)
+           #does the map, so that we don't short circuit
+      if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
         #it succeeded
         format.html { redirect_to :edit_memberships_of_group, :notice=>"#{@students.count} students added successfully"}
         format.xml  {head "ok"}
@@ -87,6 +88,7 @@ class GroupsController < ApplicationController
     end
   end
   def edit_memberships
-    raise NotImplementedError
+    @group = Group.find(params[:id])
+    @students=[Student.new]*10
   end
 end

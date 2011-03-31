@@ -21,17 +21,17 @@ describe GroupsController do
     end
     it "should create students based on passed in parameters" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}
-      Student.find_by_name("Imma new guy").should exist
+      Student.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist
       Student.find_by_name("Imma new guy").phone_number.should == "(555) 123-4567"
     end
     it "should automatically add those created students to the group" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}
       @group.students.count.should == 2
-      @group.students.find_by_name("Imma new guy").should exist
+      @group.students.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist
     end
     it "should not create a duplicate student" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>@nonmember.phone_number}]}
-      Student.find_by_phone_number(@nonmember.phone_number).count.should == 1
+      Student.find_all_by_phone_number(@nonmember.phone_number).count.should == 1
     end
     it "should add existing students (which are found, not created) to the group" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>@nonmember.phone_number}]}

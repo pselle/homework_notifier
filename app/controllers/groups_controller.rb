@@ -71,9 +71,16 @@ class GroupsController < ApplicationController
   end
   #for now, acts more like 'add members'
   def update_memberships
-    raise NotImplementedError
+    @group = Group.find(params[:id])
+
+    @group.students += params[:students].map {|student_params| Student.find_or_create_by_phone_number(student_params)}
+
+    respond_to do |format|
+      #format.html {render :action=>"edit_memberships"}
+      #format.xml  {head "ok"}
+    end
   end
-  def get_memberships
+  def edit_memberships
     raise NotImplementedError
   end
 end

@@ -61,7 +61,6 @@ describe GroupsController do
     it "should render back to edit with errors on invalid student" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"",:phone_number=>"123"}]}
       assigns[:students][0].errors.should_not be_empty
-      response.should redirect_to(:edit_memberships_of_group)
     end
     
     it "should silently ignore blank entries" do
@@ -71,6 +70,15 @@ describe GroupsController do
       
       @group.students.count.should == 2
       response.should redirect_to(:edit_memberships_of_group)
+      assigns[:students].each {|s| s.errors.should be_empty}
+    end
+    
+    
+    #this is based on a found bug:
+    it "should check for existing students, agnostic of original phone number input formatting" do
+      put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>@nonmember.phone_number.gsub(/\D/,'')}]}
+      @group.students.count.should == 2
+      @group.students.should include(@nonmember)
       assigns[:students].each {|s| s.errors.should be_empty}
     end
   end

@@ -26,4 +26,10 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.include Devise::TestHelpers, :type => :controller
+  def login(user=Factory.create(:user))
+    @request.env["devise.mapping"] = Devise.mappings[:admin]
+    sign_in user
+  end
 end

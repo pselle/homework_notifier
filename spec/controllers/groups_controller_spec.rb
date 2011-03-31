@@ -13,6 +13,7 @@ describe GroupsController do
   end
   describe "#update_memberships" do
     before(:each) do
+      login
       @group=Factory.create(:group)
       @member1 = Factory.create(:student)
       @group.students << @member1

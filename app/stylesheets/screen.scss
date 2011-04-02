@@ -1,10 +1,31 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import "blueprint";
+@import "blueprint/reset";
+@import "blueprint/scaffolding";
 
-@import "compass/reset";
 @import "compass";
+@import "compass/layout";
+@import "compass/css3";
 
-body{ }
-container{ width: 950px; margin-right: auto; margin-left: auto; }
+@import "partials/base";
+@import "partials/colors";
+@import "partials/fonts";
+
+
+body.two-col {
+  #container {
+    @include container; }
+  #header {
+    @include column($blueprint-grid-columns); text-align: right; }
+  #sidebar {
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    $sidebar-columns: floor($blueprint-grid-columns / 3);
+    @include column($sidebar-columns); }
+  #content {
+		#alert, #notice { @include border-radius(5px); text-align: center; padding: 5px; margin-bottom: 10px; color: white;}
+		#alert{ background-color: $alert; border: solid 1px $alert-border; }
+		#notice{ background-color: $notice;  border: solid 1px $notice-border; }
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+    // true means it's the last column in the row
+    @include column($content-columns, true); } }

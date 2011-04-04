@@ -1,0 +1,35 @@
+User sign in process, V1.0
+
+
+User accounts:
+	teacher role
+Admin will be handled manually by us through the console.
+
+1. [optionally, teacher requests account, request is forwarded to admin]
+
+2. admin sets up account for teacher
+	by email address
+	via console
+
+3. teacher gets invitation email, with unique link. temporary password?
+
+4. following link, teacher confirms account and is redirected to profile info page.
+	after signup is complete the following is required:
+		first/last name
+		display name
+		password
+	the following is optional:
+		cell phone #
+
+5. teacher can later return to site and sign in again with email/password
+
+6. teacher can later edit profile info
+
+Implementation:
+	We'll use devise for authentication. a devise-style user account will handle sign-in
+	we'll use the 'Confirmable' module to act as an invitation email
+	required information will have a conditional validation based on registration confirmation
+	
+
+Future considerations:
+	admin user role

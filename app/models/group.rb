@@ -2,8 +2,8 @@ class Group < ActiveRecord::Base
   belongs_to :user
   has_many :memberships, :dependent=>:destroy
   has_many :students, :through=> :memberships
-  validates_format_of :phone_number, :with=>PHONE_FORMAT, :message=>PHONE_FORMAT_MESSAGE
-  before_validation :massage_number
+  validates_format_of :phone_number, :with=>PHONE_FORMAT, :message=>PHONE_FORMAT_MESSAGE, :allow_nil=>true, :allow_blank=>true
+  before_validation :massage_number, :if=>lambda {phone_number.present?}
   
   private
   def massage_number

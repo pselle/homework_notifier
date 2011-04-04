@@ -8,7 +8,12 @@ describe GroupsController do
     end
   end
   describe "#create" do
+    before :each do
+      login
+    end    
     it "after successful create, should redirect to the edit memberships page" do
+      post :create
+      response.should redirect_to( edit_memberships_of_group_path(1)) # Ugly hardcoded id !!
     end
   end
   describe "#update_memberships" do

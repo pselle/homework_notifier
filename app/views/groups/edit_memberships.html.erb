@@ -1,6 +1,6 @@
 <h1>Editing group memberships</h1>
 <%= form_for(@group,:url=>:update_memberships_of_group) do |f| %>
-  <% @students.each_with_index do |student| %>
+  <% @students.each_with_index do |student, index| %>
     <% student.id=nil %>
     <%= fields_for("students[]",student) do |sf|%>
       <% if student.errors.any? %>

@@ -37,7 +37,7 @@ class GroupsController < ApplicationController
 		
     respond_to do |format|
       if @group.save
-        format.html { redirect_to(groups_url, :notice => 'Group was successfully created.') }
+        format.html { redirect_to(edit_memberships_of_group_path(@group), :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }

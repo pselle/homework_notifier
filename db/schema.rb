@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110404192030) do
+ActiveRecord::Schema.define(:version => 20110404202225) do
 
   create_table "groups", :force => true do |t|
     t.integer  "user_id"
@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20110404192030) do
     t.string   "name"
     t.string   "phone_number"
     t.string   "display_name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

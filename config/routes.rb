@@ -10,7 +10,9 @@ HomeworkNotifier::Application.routes.draw do
   end
 
   # devise_for :users
-  devise_for :users, :path => "users", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }	
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }, :controllers=>{:confirmations=>"confirmations"} do
+    put "/users/verification", :to=>"confirmations#update", :as=>:update_user_confirmation
+  end
   # devise_for :admins, :controllers => { :sessions => "admins/sessions" }
 
   # The priority is based upon order of creation:

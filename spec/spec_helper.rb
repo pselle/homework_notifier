@@ -30,6 +30,7 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   def login(user=Factory.create(:user))
     @request.env["devise.mapping"] = Devise.mappings[:admin]
+    user.confirm!
     sign_in user
   end
 end

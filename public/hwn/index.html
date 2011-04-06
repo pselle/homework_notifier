@@ -6,13 +6,16 @@
 	<title>Homework Notifier</title>  
   <link rel="stylesheet" href="reset.css">
   <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:regular,bold' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 	  body {
 	    background: #E3E3E3;
 	  }
 	  
 	  h1 { font-family: 'Luckiest Guy', arial, serif; color: #fff;}
-	  
+	  h2 { font-family: 'Oswald', arial, serif; }
+	  h3 { font-family: 'Josefin Sans', arial, serif; }
 	  
 	  #logo {
 	    line-height: 37px;
@@ -53,6 +56,25 @@
 	    margin: 0 0 10px 10px;
 	    float: left;
 	  }
+	  #main_menu{
+	      padding: 0px;
+	      margin: 0px;
+	  }
+	  #main_menu li{
+	      list-style: none;
+	      float: left;
+	      margin-right: 1.3em;
+	      line-height: 115px;
+	      font-weight: bold;
+	      font-size: 28px;
+	  }
+	  #main_menu li:first-child{
+	      margin-left: 1.3em;
+	  }
+	  #main_menu li:last-child{
+	      float: right;
+	      margin-right: 10px;
+	  }
 	  #main {
 	    margin: 10px 10px 0px 0px;
 	    background-color: #fff;
@@ -79,7 +101,11 @@
 	    min-height: 610px;
 	  }
 	  .title_text{
-	    
+	    color: #fff;
+		font-size: 40px;
+		position: relative;
+	    top: -1px;
+		left: 10px;
 	  }
 	</style>
 </head>
@@ -92,16 +118,27 @@
       </div>
     </div>
     <div id="nav">
+        <ul id="main_menu">
+            <h3>
+            <li>ABOUT</li>
+            <li>HELP</li>
+            <li>GROUPS</li>
+            <li>ACCOUNT</li>
+            <li>SIGN IN</li>
+            </h3>
+        </ul>
     </div>
     <div id="main">
       <div class="header">
         <div class="title_text">
+			<h2>Your Groups<h2>
         </div>
       </div>
     </div>
     <div id="sidebar">
       <div class="header">
         <div class="title_text">
+			<h2>Send Txt</h2>
         </div>
       </div>
     </div>

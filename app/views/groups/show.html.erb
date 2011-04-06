@@ -13,6 +13,16 @@
   <%= @group.description %>
 </p>
 
-
+<%= form_for @group,:url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
+  <%= fields_for :message do |mf| %>
+    <div class="field">
+      <%= mf.label :content, "Message:" %>
+      <%= mf.text_area :content, :rows=>5,:cols=>20 %>
+    </div>
+  <%end%>
+  <div class="actions">
+    <%= f.submit "send message"%>
+  </div>
+<%end%>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>

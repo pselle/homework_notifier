@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/codeforamerica/flocky.git
-  revision: f1a53bba4192d3b6d38af8642b86ee9cd3817dfb
+  revision: 9602e0cb0bedcca0877dd9e80f32fdd987f2fe93
   specs:
-    flocky (0.0.1)
+    flocky (0.0.2)
       httparty
       resque
 

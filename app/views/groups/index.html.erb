@@ -1,27 +1,41 @@
-<h1>Groups</h1>
+<div id="main"> 
+  <div class="header"> 
+    <div class="title_text"> 
+    	<h2>Your Groups<h2> 
+    </div>
+  </div> 
+  
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <% @groups.each do |group| %>
+    <tr>
+      <td><%= group.user_id %></td>
+      <td><%= group.title %></td>
+      <td><%= group.description %></td>
+      <td><%= link_to 'Show', group %></td>
+      <td><%= link_to 'Edit', edit_group_path(group) %></td>
+      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
 
-<% @groups.each do |group| %>
-  <tr>
-    <td><%= group.user_id %></td>
-    <td><%= group.title %></td>
-    <td><%= group.description %></td>
-    <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <br />
 
-<br />
+  <%= link_to 'New Group', new_group_path %>
 
-<%= link_to 'New Group', new_group_path %>
+</div> 
+<div id="sidebar"> 
+  <div class="header"> 
+    <div class="title_text"> 
+	<h2>Send Txt</h2> 
+    </div> 
+  </div> 
+</div>

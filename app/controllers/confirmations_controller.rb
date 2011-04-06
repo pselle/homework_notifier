@@ -1,6 +1,6 @@
 #this code taken from https://github.com/plataformatec/devise/wiki/How-To:-Override-confirmations-so-users-can-pick-their-own-passwords-as-part-of-confirmation-activation
 
-class ConfirmationsController < Devise::PasswordsController
+class ConfirmationsController < Devise::ConfirmationsController
   skip_before_filter(:authenticate_user!)
   # PUT /resource/confirmation
   def update

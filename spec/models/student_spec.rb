@@ -10,10 +10,10 @@ describe Student do
       @student.phone_number.scan(/\d/).length.should == 10
     end
     it "must be in the canonical format" do
-      @student.phone_number.should match(/^\(\d{3}\) \d{3}-\d{4}$/)
+      @student.phone_number.should match(PhoneValidator::STORAGE_REGEX)
     end
     it "should automatically be converted to the canonical format, agnostic of valid-ish input" do
-      Factory.create(:student, :phone_number=>"5551234567").phone_number.should == "(555) 123-4567"
+      Factory.create(:student, :phone_number=>"(555) 123-4567").phone_number.should == "5551234567"
     end
     it "must be unique" do
       Factory.build(:student,:phone_number=>@student.phone_number).should_not be_valid

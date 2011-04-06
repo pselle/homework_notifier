@@ -13,9 +13,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name, :if=>:confirmation_sent_at?
   validates_presence_of :display_name, :if=>:confirmation_sent_at?
-  validates_format_of :phone_number, :with=>PHONE_FORMAT, :message=>PHONE_FORMAT_MESSAGE, :allow_nil=>true, :allow_blank=>true
-  before_validation :massage_number, :if=>lambda {phone_number.present?}
-  
+  validates_phone_number :phone_number, :allow_nil=>true, :allow_blank=>true
   
   validates_presence_of :password_confirmation, :if=>:password_required?
   private
@@ -24,12 +22,5 @@ class User < ActiveRecord::Base
   end
   def password_required?
     (confirmation_sent_at? && encrypted_password.blank?) || password.present? || password_confirmation.present?
-  end
-  def massage_number
-    if !(phone_number =~ PHONE_FORMAT)
-      if phone_number && (nums=phone_number.scan(/\d/)).length==10
-        self.phone_number="(%s%s%s) %s%s%s-%s%s%s%s"%nums #is there a better way to write this?
-      end
-    end
   end
 end

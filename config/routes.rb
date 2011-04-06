@@ -1,11 +1,15 @@
 HomeworkNotifier::Application.routes.draw do
-  resources :students
+  resources :students do
+    #post "send_message", :as=>:send_message_to #possibly add in future
+  end
 
   root :to => 'groups#index'
   resources :groups do
+    post "receive_message"
     member do
       get "edit_memberships", :as=>:edit_memberships_of
       put "update_memberships", :as=>:update_memberships_of
+      post "send_message", :as=>:send_message_to
     end
   end
 

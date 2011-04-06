@@ -91,4 +91,25 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @students=[Student.new]*10
   end
+  
+  #POST groups/:id/send_message, sends a message to all members of group
+  def send_message
+    @group = Group.find(params[:id])
+    message = params[:message] #TODO: safety, parsing, whatever.
+    #TODO: ensure group found
+    @group.students.each do |student|
+      $outbound_flocky.message message,student.phone_number
+    end
+    redirect_to :show #or something
+  end
+  #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
+  def receive_message
+    @group=Group.find_by_phone_number(params[:incoming_number])
+    message = params[:message]
+    if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
+      [@group.students-@sending_student].each do |student|
+        $outbound_flocky.message message,student.phone_number
+      end
+    end
+  end
 end

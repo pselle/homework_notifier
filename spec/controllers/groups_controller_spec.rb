@@ -87,4 +87,11 @@ describe GroupsController do
       assigns[:students].each {|s| s.errors.should be_empty}
     end
   end
+  
+  describe "send_message" do
+    pending "should send a message to all group members" {}
+  end
+  describe "receive_message" do
+    pending "should send a message to all group members except original sender"{}
+  end
 end

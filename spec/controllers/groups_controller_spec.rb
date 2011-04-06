@@ -28,7 +28,7 @@ describe GroupsController do
     it "should create students based on passed in parameters" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}
       Student.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist
-      Student.find_by_name("Imma new guy").phone_number.should == "(555) 123-4567"
+      Student.find_by_name("Imma new guy").phone_number.should == "5551234567"
     end
     it "should automatically add those created students to the group" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}
@@ -81,7 +81,7 @@ describe GroupsController do
     
     #this is based on a found bug:
     it "should check for existing students, agnostic of original phone number input formatting" do
-      put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>@nonmember.phone_number.gsub(/\D/,'')}]}
+      put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>"5 5 5 1 2 3 4 5 6 7"}]}
       @group.students.count.should == 2
       @group.students.should include(@nonmember)
       assigns[:students].each {|s| s.errors.should be_empty}

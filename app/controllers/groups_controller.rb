@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except=>:receive_message
 
   def index
     @groups = Group.all
@@ -105,11 +105,13 @@ class GroupsController < ApplicationController
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
   def receive_message
     @group=Group.find_by_phone_number(params[:incoming_number])
-    message = params[:message]
     if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
-      [@group.students-@sending_student].each do |student|
+      message = @sending_student.name+": "+params[:message]
+      (@group.students-[@sending_student]).each do |student|
         $outbound_flocky.message message,student.phone_number
       end
     end
+    render :text=>"", :status=>202
+    #needs to return something API-like, yo
   end
 end

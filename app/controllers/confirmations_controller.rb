@@ -18,10 +18,10 @@ class ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
     with_unconfirmed_confirmable do
-      if @confirmable.encrypted_password.blank?
-        do_show
-      else
+      if @confirmable.valid?
         do_confirm
+      else
+        do_show
       end
     end
     if !@confirmable.errors.empty?

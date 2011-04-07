@@ -1,0 +1,19 @@
+/* --------------------------------------------------------------
+
+   forms.css
+   * Default CSS file for form elements.
+
+-------------------------------------------------------------- */
+
+.formwrap{
+	border: 1px solid #F0F0F0;
+}
+#group_message{
+	height: 160px;
+	width: 269px;
+	resize: none;
+	padding: 5px;
+	margin-top: 10px;
+	color: dimGray;
+	font-size: 1.2em !important;
+}

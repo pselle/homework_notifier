@@ -3,4 +3,4 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
 HomeworkNotifier::Application.initialize!
-$outbound_flocky = Flocky.new ENV['FLOCKY_SMS'],ENV['FLOCKY_TOKEN'],ENV['FLOCKY_APPNUM'],{:username=>ENV['FLOCKY_USERNAME'],:password=>ENV['FLOCKY_PASSWORD']}, :queue => false
+$outbound_flocky = Flocky.new ENV['FLOCKY_TOKEN'],ENV['FLOCKY_APPNUM'],{:username=>ENV['FLOCKY_USERNAME'],:password=>ENV['FLOCKY_PASSWORD']}, :queue => false

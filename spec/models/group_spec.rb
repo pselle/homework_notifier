@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe Student do
+describe Group do
   before(:each) do
     @group = Factory.create(:group)
   end
 
   describe "their phone number" do
-    it "may be blank" do
+    it "may NOT be blank" do
       @group.phone_number=nil
-      @group.should be_valid
+      @group.should_not be_valid
       @group.phone_number=""
-      @group.should be_valid
+      @group.should_not be_valid
     end
     it "if present, must be valid" do
       @group.phone_number="abc123"

@@ -13,7 +13,7 @@ describe GroupsController do
     end    
     it "after successful create, should redirect to the edit memberships page" do
       post :create
-      response.should redirect_to( edit_memberships_of_group_path(1)) # Ugly hardcoded id !!
+      response.should redirect_to(edit_memberships_of_group_path(assigns[:group].id)) # Ugly hardcoded id !!
     end
   end
   
@@ -82,7 +82,7 @@ describe GroupsController do
     
     #this is based on a found bug:
     it "should check for existing students, agnostic of original phone number input formatting" do
-      put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>"5 5 5 1 2 3 4 5 6 7"}]}
+      put :update_memberships, {:id=>@group.id, :students=>[{:name=>@nonmember.name,:phone_number=>"___"+@nonmember.phone_number+"~~~"}]}
       @group.students.count.should == 2
       @group.students.should include(@nonmember)
       assigns[:students].each {|s| s.errors.should be_empty}

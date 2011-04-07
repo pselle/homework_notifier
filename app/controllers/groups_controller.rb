@@ -114,7 +114,10 @@ class GroupsController < ApplicationController
   def update_memberships
     @group = Group.find(params[:id])
 
-    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
+    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map do |student_params|
+      student_params[:phone_number] = PhoneValidator::massage_number(student_params[:phone_number])
+      Student.find_or_initialize_by_phone_number(student_params)
+    end
     
     respond_to do |format|
            #does the map, so that we don't short circuit
@@ -165,7 +168,7 @@ class GroupsController < ApplicationController
 
   private
   def get_new_phone_number
-    r=$outbound_flocky.create_phone_number_synchronous
+    r=$outbound_flocky.create_phone_number_synchronous("1617")
     if r[:response].code == 200
       return r[:response].parsed_response["href"].match(/\+1(\d{10})/)[1] rescue nil
     end

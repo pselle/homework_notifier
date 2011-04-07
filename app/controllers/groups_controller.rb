@@ -118,10 +118,9 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     message = params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
-    responses = @group.students.map do |student|
-      $outbound_flocky.message message,student.phone_number
-    end
-    redirect_to @group, :notice => responses.to_json #or something
+    numbers = @group.students.map { |student| student.phone_number }
+		response = $outbound_flocky.message message, numbers
+    redirect_to @group, :notice => response.to_json #or something
   end
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
   def receive_message
@@ -130,11 +129,12 @@ class GroupsController < ApplicationController
     @group=Group.find_by_phone_number(params[:incoming_number])
     if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
       message = @sending_student.name+": "+params[:message]
-      responses = (@group.students-[@sending_student]).map do |student|
-        $outbound_flocky.message message,student.phone_number
+      numbers = (@group.students-[@sending_student]).map do |student|
+				student.phone_number
       end
+      response = $outbound_flocky.message message, numbers
     end
-    render :text=> responses.to_json, :status=>202
+    render :text=> response.to_json, :status=>202
     #needs to return something API-like, yo
   end
 

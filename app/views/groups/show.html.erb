@@ -1,28 +1,27 @@
-<p>
-  <b>User:</b>
-  <%= @group.user_id %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @group.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @group.description %>
-</p>
-
-<%= form_for @group,:url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
-  <%= fields_for :message do |mf| %>
-    <div class="field">
-      <%= mf.label :content, "Message:" %>
-      <%= mf.text_area :content, :rows=>5,:cols=>20 %>
-    </div>
-  <%end%>
-  <div class="actions">
-    <%= f.submit "send message"%>
-  </div>
-<%end%>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<div id="left_column">
+	<%= form_for @group,:url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
+	  <%= fields_for :message do |mf| %>
+	    <div class="field">
+	      <%= mf.label :content, "Message:" %>
+				<br />
+	      <%= mf.text_area :content, :rows=>5,:cols=>20 %>
+	    </div>
+	  <%end%>
+	  <div class="actions">
+	    <br /><%= f.submit "Send Message"%>
+	  </div>
+	<%end%>
+	<br />
+	<%= link_to 'Back', groups_path %>
+</div>
+<div id="right_column">
+	<% if @group.students.blank? %>
+		<h4>There are no students associated with this group.</h4>
+	<% else %>
+		<h4>Your message will be sent to the following recipients:</h4>
+	<% end %>
+	<% for member in @group.students %>
+		<%= member.name %>
+		<br />
+	<% end %>
+</div>

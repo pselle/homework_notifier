@@ -1,8 +1,10 @@
 class GroupsController < ApplicationController
   before_filter :authenticate_user!, :except=>:receive_message
+  before_filter :load_groups
 
   def index
     @groups = Group.all
+    @page_title = "Your Groups"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,6 +14,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @page_title = @group.title
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,7 +24,9 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-
+    @page_title = "New Group"
+    @students=[Student.new]*10
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @group }
@@ -30,12 +35,15 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
+    @page_title = "#{@group.title}"
+    @students = @group.students
   end
 
   def create
     @group = Group.new(params[:group])
     @group.phone_number = get_new_phone_number
-
+		@page_title = "New Groups"
+		
     respond_to do |format|
       if @group.save
         format.html { redirect_to(edit_memberships_of_group_path(@group), :notice => 'Group was successfully created.') }
@@ -57,7 +65,9 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-
+    @page_title = "#{@group.title}"
+    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
+    
     respond_to do |format|
       if @group.update_attributes(params[:group])
         format.html { redirect_to(groups_url, :notice => 'Group was successfully updated.') }
@@ -88,6 +98,7 @@ class GroupsController < ApplicationController
       format.xml {head "ok"}#TODO: better return
     end
   end 
+  
   #delete. remove single student, by :student_id
   def remove_student
     @group = Group.find(params[:id])
@@ -131,6 +142,7 @@ class GroupsController < ApplicationController
 		response = $outbound_flocky.message message, numbers
     redirect_to @group, :notice => response.to_json #or something
   end
+  
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
   def receive_message
     params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
@@ -145,6 +157,10 @@ class GroupsController < ApplicationController
     end
     render :text=> response.to_json, :status=>202
     #needs to return something API-like, yo
+  end
+  
+  def load_groups
+    @groups = Group.all
   end
 
   private

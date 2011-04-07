@@ -1,19 +1,40 @@
-<div id="main"> 
-  <div class="header"> 
-    <div class="title_text"> 
-    	<h2>Your Groups<h2> 
-    </div>
-  </div> 
-  
-  <table>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+<div id="main">
+	<div class="header">
+		<div class="title_text">
+			<h2>Your Groups<h2>
+		</div>
+	</div>
+	<div class="content">
+	<% @groups.each do |group| %>
+		<h3>
+			<div id="title_left">
+				<div class="content_title">
+					<%= group.title %>
+				</div>
+				<div class="content_subtitle">
+					<%= group.description %>
+				</div>
+			</div>
+			<div id="title_right">
+				<div class="content_title">
+					(555) 555-5555
+				</div>
+				<div class="content_subtitle">
+					13 members
+				</div>
+			</div>
+		</h3>
+	    <tr>
+	      <td><%= group.user_id %></td>
+	      <td><%= group.title %></td>
+	      <td><%= group.description %></td>
+	      <td><%= link_to 'Show', group %></td>
+	      <td><%= link_to 'Edit', edit_group_path(group) %></td>
+	      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+	    </tr>
+	  <% end %>
+	</div>
+</div>
 
   <% @groups.each do |group| %>
     <tr>
@@ -32,10 +53,15 @@
   <%= link_to 'New Group', new_group_path %>
 
 </div> 
-<div id="sidebar"> 
-  <div class="header"> 
-    <div class="title_text"> 
-	<h2>Send Txt</h2> 
-    </div> 
-  </div> 
+<div id="sidebar">
+  <div class="header">
+    <div class="title_text">
+		<h2>Send Txt</h2>
+    </div>
+  </div>
+  <div class="content">
+	<span class="formwrap">
+		<textarea id="group_message" name="group_message">And today's assignment is...</textarea>
+	</span>
+  </div>
 </div>

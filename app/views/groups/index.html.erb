@@ -3,6 +3,7 @@
 		<div class="title_text">
 			<h2>Your Groups<h2>
 		</div>
+		<%= link_to 'New Group', new_group_path %>
 	</div>
 	<div class="content">
 	<% @groups.each do |group| %>
@@ -24,35 +25,16 @@
 				</div>
 			</div>
 		</h3>
+	</div>
+	<table>
 	    <tr>
-	      <td><%= group.user_id %></td>
-	      <td><%= group.title %></td>
-	      <td><%= group.description %></td>
 	      <td><%= link_to 'Show', group %></td>
 	      <td><%= link_to 'Edit', edit_group_path(group) %></td>
 	      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
 	    </tr>
-	  <% end %>
-	</div>
+	</table>
 </div>
-
-  <% @groups.each do |group| %>
-    <tr>
-      <td><%= group.user_id %></td>
-      <td><%= group.title %></td>
-      <td><%= group.description %></td>
-      <td><%= link_to 'Show', group %></td>
-      <td><%= link_to 'Edit', edit_group_path(group) %></td>
-      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
-  </table>
-
-  <br />
-
-  <%= link_to 'New Group', new_group_path %>
-
-</div> 
+<% end %>
 <div id="sidebar">
   <div class="header">
     <div class="title_text">

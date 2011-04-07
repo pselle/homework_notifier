@@ -16,15 +16,16 @@ describe GroupsController do
       response.should redirect_to( edit_memberships_of_group_path(1)) # Ugly hardcoded id !!
     end
   end
+  
+  before(:each) do
+    login
+    @group=Factory.create(:group)
+    @member1 = Factory.create(:student)
+    @group.students << @member1
+    @nonmember=Factory.create(:student)
+  end
+  
   describe "#update_memberships" do
-    before(:each) do
-      login
-      @group=Factory.create(:group)
-      @member1 = Factory.create(:student)
-      @group.students << @member1
-      @nonmember=Factory.create(:student)
-      
-    end
     it "should create students based on passed in parameters" do
       put :update_memberships, {:id=>@group.id, :students=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}
       Student.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist
@@ -96,4 +97,44 @@ describe GroupsController do
     pending "should send a message to all group members except original sender" do
 		end
   end
+  
+  describe "add student" do
+    pending "should add a new student" do
+      expect {
+        put :add_student, {:id=>@group.id, :student_id=>@nonmember.id}, :format=>'xml'
+        @group.reload
+        raise "#{@group.students}"
+        @group.students << @nonmember
+        
+      }.to change(@group.students,:count).by(2)
+      @group.students.should include?(@nonmember)
+    end
+    pending "should not fail when adding a student already in the group" do
+    end
+    pending "should not double-add an existing student" do
+      expect {
+        put :add_student, {:id=>@group.id, :student_id=>@member1.id}, :format=>'xml'
+        @group.reload
+      }.to_not change(@group.students,:count)
+    end
+  end
+
+  describe "remove student" do
+    pending "should remove an existing student" do
+      expect {
+        delete :remove_student, {:id=>@group.id, :student_id=>@member1.id}, :format=>'xml'
+        @group.reload
+      }.to change(@group.students,:count).by(-1)
+      @group.students.should_not include?(@nonmember)
+    end
+    pending "should not fail when removing an already removed student" do
+    end
+    pending "should not double-delete anything" do
+      expect {
+        delete :remove_student, {:id=>@group.id, :student_id=>@nonmember.id}, :format=>'xml'
+        @group.reload
+      }.to_not change(@group.students,:count)
+    end
+  end
+  
 end

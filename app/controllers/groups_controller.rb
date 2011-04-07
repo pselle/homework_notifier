@@ -69,6 +69,27 @@ class GroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  #put. add single student, by :student_id
+  def add_student
+    @group = Group.find(params[:id])
+    @student=Student.find(params[:student_id])
+    @group.students << @student unless @group.students.include? @student
+    respond_to do |format|
+      format.xml {head "ok"}#TODO: better return
+    end
+  end 
+  #delete. remove single student, by :student_id
+  def remove_student
+    @group = Group.find(params[:id])
+    @student=Student.find(params[:student_id])
+    @group.students.delete(@student)
+    respond_to do |format|
+      format.xml {head "ok"}
+    end
+  end
+  
+  
   #for now, acts more like 'add members'
   def update_memberships
     @group = Group.find(params[:id])
@@ -116,4 +137,5 @@ class GroupsController < ApplicationController
     render :text=> responses.to_json, :status=>202
     #needs to return something API-like, yo
   end
+
 end

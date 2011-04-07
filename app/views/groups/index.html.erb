@@ -1,54 +1,40 @@
-<div id="main">
-	<div class="header">
-		<div class="title_text">
-			<h2>Your Groups<h2>
-		</div>
-			<h3>
-				<ul id="group_tabs">
-					<% @groups.each do |group| %>
-					<li class="active_tab"><%= group.title %></li>
-					<li><%= group.title %></li>
-					<% end %>
-					<li><%= link_to '+', new_group_path %></li>
-				</ul>
-			</h3>
-	</div>
-	<div class="content">
-	<% @groups.each do |group| %>
-		<h3>
-			<div id="content_title">
-				<div class="content_left">
-					<%= group.title %>
-				</div>
-				<div class="content_right">
-					<%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %>
-				</div>
-			</div>
-			<div id="content_subtitle">
-				<div class="content_left">
-					<%= group.description %>
-				</div>
-				<div class="content_right">
-					<%= pluralize group.students.count, "member" %>
-				</div>
-			</div>
-		</h3>
-			<table style="clear: both;">
-			    <tr>
-			      <td><%= link_to 'Show', group %></td>
-			      <td><%= link_to 'Edit', edit_group_path(group) %></td>
-			      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-			    </tr>
-			</table>
-	</div>
-</div>
+<% if @groups.blank? %>
+	<h3>You haven't created any groups.  Please <%= link_to 'click here', new_group_path %> to set one up.</h3>
+<% else %>
+	<table style="clear: both;">
+		<% @groups.each do |group| %>
+			<tr>
+				<td>
+					<div id="content_title">
+						<h4><%= group.title %></h4>
+					</div>
+				</td>
+				<td>
+					<div class="content_right">
+						<h4><%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %></h4>
+					</div>
+				</td>
+				<td>
+					<div class="content_right">
+						<h4><%= pluralize group.students.count, "member" %></h4>
+					</div>
+				</td>
+				<td>
+					<div class="content_right">
+						<table class="padded">
+					    <tr>
+					      <td><%= link_to 'Send Txt', group, :class => 'button oswald' %></td>
+					      <td><%= link_to 'Edit', edit_group_path(group), :class => 'button oswald' %></td>
+					      <td><%= link_to 'Delete', group, :class => 'button oswald', :confirm => 'Delete this group and all texting history?', :method => :delete %></td>
+							<tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		<% end %>
+		<tr>
+			<td><br /><br /><%= link_to "Add New Group", new_group_path, :class => 'button oswald' %>
+			</td>
+		</tr>
+	</table>
 <% end %>
-<div id="sidebar">
-  <div class="header">
-    <div class="title_text">
-		<h2>Send Txt</h2>
-    </div>
-  </div>
-  <div class="content">
-  </div>
-</div>

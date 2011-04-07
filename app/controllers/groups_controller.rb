@@ -34,16 +34,25 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(params[:group])
-		
+    @group.phone_number = get_new_phone_number
+
     respond_to do |format|
       if @group.save
         format.html { redirect_to(edit_memberships_of_group_path(@group), :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
+        #TODO: find a better, less API-intensive way to ensure we don't abuse our tropo provisioning
+        if @group.phone_number.nil?
+          @group.errors[:phone_number] = ["could not provision phone number at this time"]
+        else
+          destroy_phone_number(@group.phone_number)
+          @group.phone_number=nil
+        end
         format.html { render :action => "new" }
         format.xml  { render :xml => @group.errors, :status => :unprocessable_entity }
       end
     end
+
   end
 
   def update
@@ -138,4 +147,16 @@ class GroupsController < ApplicationController
     #needs to return something API-like, yo
   end
 
+  private
+  def get_new_phone_number
+    r=$outbound_flocky.create_phone_number_synchronous
+    if r[:response].code == 200
+      return r[:response].parsed_response["href"].match(/\+1(\d{10})/)[1] rescue nil
+    end
+    
+    return nil
+  end
+  def destroy_phone_number(num)
+    $outbound_flocky.destroy_phone_number_synchronous(num)
+  end
 end

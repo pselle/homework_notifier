@@ -3,5 +3,5 @@ class Group < ActiveRecord::Base
   has_many :memberships, :dependent=>:destroy
   has_many :students, :through=> :memberships
 
-  validates_phone_number :phone_number, :allow_nil=>true, :allow_blank=>true
+  validates_phone_number :phone_number
 end

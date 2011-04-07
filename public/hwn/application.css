@@ -79,7 +79,6 @@ padding: 15px 10px;
     text-decoration: none;
     color: #000;
 }
-
 #sign_in{
     background-color: #5A5A5A;
     border-bottom-left-radius: 7px;
@@ -130,17 +129,20 @@ padding: 15px 10px;
 .content{
 	padding: 10px 15px 0px 15px;
 	position: relative;
+	border: 1px red dashed;
 }
 .content_title{
 	position: relative;
 	text-transform: uppercase;
 	font-size: 30px;
+	border: 1px red dashed;
 }
 .content_subtitle{
 	position: relative;
 	float: right;
 	font-size: 16px;
 	top: -13px;
+	border: 1px red dashed;
 }
 #title_left{
 	position: relative;
@@ -150,4 +152,7 @@ padding: 15px 10px;
 	float: right;
 	padding-right: 0px;
 	position: relative;
+}
+#users_table{
+	clear: both;
 }

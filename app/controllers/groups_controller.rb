@@ -104,6 +104,8 @@ class GroupsController < ApplicationController
   end
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
   def receive_message
+    params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
+    params[:origin_number] = $1 if params[:origin_number]=~/^1(\d{10})$/
     @group=Group.find_by_phone_number(params[:incoming_number])
     if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
       message = @sending_student.name+": "+params[:message]

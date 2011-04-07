@@ -7,6 +7,7 @@ gem 'rails', '3.0.5'
 
 gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
 gem 'sqlite3'
+gem 'json'
 gem "compass", ">= 0.10.6"
 gem "devise"
 group :test, :development do

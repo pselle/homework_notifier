@@ -3,36 +3,44 @@
 		<div class="title_text">
 			<h2>Your Groups<h2>
 		</div>
-		<%= link_to 'New Group', new_group_path %>
+			<h3>
+				<ul id="group_tabs">
+					<% @groups.each do |group| %>
+					<li class="active_tab"><%= group.title %></li>
+					<li><%= group.title %></li>
+					<% end %>
+					<li><%= link_to '+', new_group_path %></li>
+				</ul>
+			</h3>
 	</div>
 	<div class="content">
 	<% @groups.each do |group| %>
 		<h3>
-			<div id="title_left">
-				<div class="content_title">
+			<div id="content_title">
+				<div class="content_left">
 					<%= group.title %>
 				</div>
-				<div class="content_subtitle">
-					<%= group.description %>
+				<div class="content_right">
+					<%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %>
 				</div>
 			</div>
-			<div id="title_right">
-				<div class="content_title">
-					(555) 555-5555
+			<div id="content_subtitle">
+				<div class="content_left">
+					<%= group.description %>
 				</div>
-				<div class="content_subtitle">
-					13 members
+				<div class="content_right">
+					<%= pluralize group.students.count, "member" %>
 				</div>
 			</div>
 		</h3>
+			<table style="clear: both;">
+			    <tr>
+			      <td><%= link_to 'Show', group %></td>
+			      <td><%= link_to 'Edit', edit_group_path(group) %></td>
+			      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+			    </tr>
+			</table>
 	</div>
-	<table>
-	    <tr>
-	      <td><%= link_to 'Show', group %></td>
-	      <td><%= link_to 'Edit', edit_group_path(group) %></td>
-	      <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
-	    </tr>
-	</table>
 </div>
 <% end %>
 <div id="sidebar">
@@ -42,8 +50,5 @@
     </div>
   </div>
   <div class="content">
-	<span class="formwrap">
-		<textarea id="group_message" name="group_message">And today's assignment is...</textarea>
-	</span>
   </div>
 </div>

@@ -91,11 +91,11 @@ describe GroupsController do
   
   describe "send_message" do
     pending "should send a message to all group members" do
-		end
+    end
   end
   describe "receive_message" do
     pending "should send a message to all group members except original sender" do
-		end
+    end
   end
   
   describe "add student" do

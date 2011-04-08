@@ -28,7 +28,11 @@
 	        <li><%= link_to "Groups", groups_path %></li>
             <li><a href="about.html" class="nav_links">ABOUT</a></li>
             <li><a href="help.html" class="nav_links">HELP</a></li>
-			<li><%= current_user ? link_to(current_user.name, destroy_user_session_path) : link_to('SIGN IN', new_user_session_path)%></li>
+			<% if current_user %>
+				<li id="sign_out"><%= link_to(current_user.name, destroy_user_session_path) %></li>
+			<% else %>
+				<li id="sign_in"><%= link_to('SIGN IN', new_user_session_path)%></li>
+			<% end %>
             </h3>
         </ul>
 		<ul id="account_menu">

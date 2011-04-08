@@ -102,7 +102,6 @@ padding: 15px 10px;
 }
 #main_menu li:last-child{
     float: right;
-    margin: -10px 0px 0px 0px;
 }
 #main_menu li:last-child a{
     background-color: #5A5A5A;
@@ -140,7 +139,11 @@ padding: 15px 10px;
 	text-transform: lowercase;
 }
 #sign_in{
-	margin-top: 100px;
+	margin-top: 0px;
+	margin-right: 0px !important;
+}
+#sign_out{
+    margin: -10px 0px 0px 0px !important;
 }
 #main {
   margin: 10px 10px 0px 0px;

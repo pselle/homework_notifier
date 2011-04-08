@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_filter :load_groups
 
   def index
-    @groups = Group.all
+    @groups = current_user.groups
     @page_title = "Your Groups"
 
     respond_to do |format|

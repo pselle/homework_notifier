@@ -13,28 +13,31 @@
 	<%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head> 
-<body> 
+<body>
   <div id="container"> 
     <div id="logo">
 		<div id="logo_text">
 			<a href="/">
-				<h1 id="top" class="lucky white">HW2</h1>
-       	<h1 id="bottom" class="lucky white">TXT</h1>
+				<h1 id="top" class="lucky white">HW2TXT</h1>
 			</a>
 		</div>
     </div>
     <div id="nav">
         <ul id="main_menu">
             <h3>
+	        <li><%= link_to "Groups", groups_path %></li>
             <li><a href="about.html" class="nav_links">ABOUT</a></li>
             <li><a href="help.html" class="nav_links">HELP</a></li>
-            <li><a href="/groups" class="nav_links">GROUPS</a></li>
-            <li><%= link_to "Account", "/users/verification", :class => "nav_links" %></li>
-						<li><%= current_user ? link_to('Sign out', destroy_user_session_path, :id => "sign_in") : link_to('Sign in', new_user_session_path, :id => "sign_in")%></li>
+			<li><%= current_user ? link_to(current_user.name, destroy_user_session_path) : link_to('SIGN IN', new_user_session_path)%></li>
             </h3>
         </ul>
-        
-    </div>
+		<ul id="account_menu">
+			<% if current_user %>
+				<li><%= link_to "Sign out", destroy_user_session_path %></li>
+				<li><%= link_to "Edit account", "/users/verification" %></li>
+			<% end %>
+		</ul>
+  </div>
 		<div id="main">
 			<div class="header">
 				<div class="title_text">

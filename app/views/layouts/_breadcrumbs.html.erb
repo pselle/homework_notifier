@@ -1,4 +1,4 @@
-<h2><%= link_to "Your Groups", groups_url, :class => 'white' %>
+<h2 class="oswald" ><%= link_to "Your Groups", groups_url, :class => 'white' %>
 	<% if params[:controller] == 'groups' && params[:action] == 'new' || params[:action] == 'create' %>
 		> New Group
 	<% elsif params[:controller] == 'groups' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show' || params[:action] == 'edit_memberships') %>

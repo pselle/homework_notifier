@@ -66,7 +66,6 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     @page_title = "#{@group.title}"
-    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
     
     respond_to do |format|
       if @group.update_attributes(params[:group])
@@ -123,7 +122,7 @@ class GroupsController < ApplicationController
            #does the map, so that we don't short circuit
       if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
         #it succeeded
-        format.html { redirect_to :edit_memberships_of_group, :notice=>"#{@students.count} students added successfully"}
+        format.html { redirect_to :group, :notice=>"#{@students.count} students added successfully"}
         format.xml  {head "ok"}
       else
         format.html {render :action=>:edit_memberships}

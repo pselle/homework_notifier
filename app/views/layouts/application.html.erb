@@ -30,10 +30,10 @@
             <li><a href="help.html" class="nav_links">HELP</a></li>
             <li><a href="/groups" class="nav_links">GROUPS</a></li>
             <li><a href="account.html" class="nav_links">ACCOUNT</a></li>
-            <li><%= current_user ? link_to('Sign out', destroy_user_session_path, :id => "sign_in") : link_to('Sign in', new_user_session_path, :id => "sign_in")%>
-			</li>	
+						<li><%= current_user ? link_to('Sign out', destroy_user_session_path, :id => "sign_in") : link_to('Sign in', new_user_session_path, :id => "sign_in")%></li>
             </h3>
         </ul>
+        
     </div>
 		<div id="main">
 			<div class="header">
@@ -44,6 +44,9 @@
 			<div class="content">
 		    <%= render :partial => 'layouts/notices' %>
 				<%= yield %>
+				<%= current_user.name %><br />
+				<%= current_user.email %>
+				
 			</div>
 		</div>
   </div> 

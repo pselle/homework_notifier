@@ -25,6 +25,8 @@ a:active { color: #3a8bd6; }
 
 a.button { background-color: #3a8bd6; border-radius: 7px; color: white; font-size: 15px; padding: 5px 10px 5px 10px; } 
 
+a.white { color: white; }
+
 .lucky { font-family: 'Luckiest Guy', arial, serif; }
 .oswald { font-family: 'Oswald', arial, serif; }
 .bold{ font-weight: bold; }

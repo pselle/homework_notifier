@@ -66,7 +66,6 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
     @page_title = "#{@group.title}"
-    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map {|student_params| Student.find_or_initialize_by_phone_number(student_params)}
     
     respond_to do |format|
       if @group.update_attributes(params[:group])

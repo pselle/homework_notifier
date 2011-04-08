@@ -1,33 +1,53 @@
-<%= form_for(@group,:url=>:update_memberships_of_group) do |f| %>
-  <% @students.each_with_index do |student, index| %>
-    <% student.id=nil %>
-    <%= fields_for("students[]",student) do |sf|%>
-      <% if student.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-            <ul>
-              <% student.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-        </div>
-      <%end%>
+<div id="left_column">
+	<span class="description">
+		<%= @group.description %>
+	</span>
+	
+	<%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
+	  <%= fields_for :message do |mf| %>
+	    <div class="field">
+	      <%= mf.label :content, "Message:" %>
+				<br />
+	      <%= mf.text_area :content, :rows=>5,:cols=>20 %>
+	    </div>
+	  <%end%>
+	  <div class="actions">
+	    <br /><%= f.submit "Send Message"%>
+	  </div>
+	<%end%>
+	<br />
+	<%= link_to 'Back', groups_path %>
+</div>
+
+<div id="right_column">
+	<%= form_for(@group,:url=>:update_memberships_of_group) do |f| %>
+	  <% @students.each_with_index do |student, index| %>
+	    <% student.id=nil %>
+	    <%= fields_for("students[]",student) do |sf|%>
+	      <% if student.errors.any? %>
+	        <div id="error_explanation">
+	          <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+	            <ul>
+	              <% student.errors.full_messages.each do |msg| %>
+	                <li><%= msg %></li>
+	              <% end %>
+	            </ul>
+	        </div>
+	      <%end%>
     
-      <div class="field">
-        <%= sf.label :name %><br />
-        <%= sf.text_field :name %>
-      </div>
-      <div class="field">
-        <%= sf.label :phone_number %><br />
-        <%= sf.text_field :phone_number %>
-      </div>
-    <%end%>
-  <%end%>
+	      <div class="field">
+	        <%= sf.label :name %><br />
+	        <%= sf.text_field :name %>
+	      </div>
+	      <div class="field">
+	        <%= sf.label :phone_number %><br />
+	        <%= sf.text_field :phone_number %>
+	      </div>
+	    <%end%>
+	  <%end%>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<%end%>
-
-<%= link_to 'Show', @group %> |
-<%= link_to 'Back', groups_path %>
+	  <div class="actions">
+	    <%= f.submit "Save Member List", :disable_with => "Hold on there, sonny..." %>
+	  </div>
+	<%end%>
+</div>

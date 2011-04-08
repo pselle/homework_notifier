@@ -1,5 +1,9 @@
 <div id="left_column">
-	<%= form_for @group,:url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
+	<span class="description">
+		<%= @group.description %>
+	</span>
+	
+	<%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
 	  <%= fields_for :message do |mf| %>
 	    <div class="field">
 	      <%= mf.label :content, "Message:" %>
@@ -15,13 +19,5 @@
 	<%= link_to 'Back', groups_path %>
 </div>
 <div id="right_column">
-	<% if @group.students.blank? %>
-		<h4>There are no students associated with this group.</h4>
-	<% else %>
-		<h4>Your message will be sent to the following recipients:</h4>
-	<% end %>
-	<% for member in @group.students %>
-		<%= member.name %>
-		<br />
-	<% end %>
+	<%= render :partial => 'member_list' %>
 </div>

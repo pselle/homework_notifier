@@ -6,7 +6,7 @@
 			<tr>
 				<td>
 					<div id="content_title">
-						<h4><%= group.title %></h4>
+						<h4><%= link_to group.title, group_path(group) %></h4>
 					</div>
 				</td>
 				<td>
@@ -17,17 +17,6 @@
 				<td>
 					<div class="content_right">
 						<h4><%= pluralize group.students.count, "member" %></h4>
-					</div>
-				</td>
-				<td>
-					<div class="content_right">
-						<table class="padded">
-					    <tr>
-					      <td><%= link_to 'Send Txt', group, :class => 'button oswald' %></td>
-					      <td><%= link_to 'Edit', edit_group_path(group), :class => 'button oswald' %></td>
-					      <td><%= link_to 'Delete', group, :class => 'button oswald', :confirm => 'Delete this group and all texting history?', :method => :delete %></td>
-							<tr>
-						</table>
 					</div>
 				</td>
 			</tr>

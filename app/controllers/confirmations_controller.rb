@@ -4,39 +4,52 @@ class ConfirmationsController < Devise::ConfirmationsController
   skip_before_filter(:authenticate_user!)
   # PUT /resource/confirmation
   def update
-    with_unconfirmed_confirmable do
-      @confirmable.update_attributes(params[:user]) #update all their attributes, including password & profile info
-      if @confirmable.valid?
-        do_confirm
-      else
-        do_show
-        @confirmable.errors.clear #so that we wont render :new
-      end
+    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token,params[:confirmation_token])
+
+    if @confirmable.new_record?
+      #if the token doesn't exist, they're already confirmed, or they never existed. what's the best way to deal?
+      flash[:notice]="invalid confirmation token"
+      redirect_to :action=>:new 
+      return false;
     end
+      
+    if @confirmable.confirmed?
+      #this should be impossible, really.
+      raise "you already confirmed, yo"
+      return false
+    end
+     
+    @confirmable.update_attributes(params[:user]) #update all their attributes, including password & profile info
+    if @confirmable.valid?
+      do_confirm
+    else
+      do_show
+    end
+
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
-    with_unconfirmed_confirmable do
-      if @confirmable.valid?
-        do_confirm
-      else
-        do_show
-      end
+    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token,params[:confirmation_token])
+
+    if @confirmable.new_record?
+      #if the token doesn't exist, they're already confirmed, or they never existed. what's the best way to deal?
+      flash[:notice]="invalid confirmation token"
+      redirect_to :action=>:new 
+      return false;
     end
-    if !@confirmable.errors.empty?
-      render_with_scope :new
+    
+    if @confirmable.confirmed?
+      #this should be impossible, really.
+      raise "you already confirmed, yo"
+      return false
     end
+    
+    #CANNOT confirm off of a show. must put back with a form
+    do_show
   end
   
   protected
-  def with_unconfirmed_confirmable
-    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
-    @confirmable.attributes = params[:user]
-    if !@confirmable.new_record? && !@confirmable.confirmed?
-      yield
-    end
-  end
 
   def do_show
     @confirmation_token = params[:confirmation_token]

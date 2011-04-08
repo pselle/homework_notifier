@@ -122,7 +122,7 @@ class GroupsController < ApplicationController
            #does the map, so that we don't short circuit
       if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
         #it succeeded
-        format.html { redirect_to :edit_memberships_of_group, :notice=>"#{@students.count} students added successfully"}
+        format.html { redirect_to :group, :notice=>"#{@students.count} students added successfully"}
         format.xml  {head "ok"}
       else
         format.html {render :action=>:edit_memberships}

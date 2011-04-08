@@ -178,7 +178,7 @@ a.nav_links{
 	left: 10px;
 }
 .content{
-	padding: 15px;
+	padding: 20px;
 	position: relative;
 }
 #content_title{
@@ -211,6 +211,8 @@ a.nav_links{
 #right_column{
   border-left: solid 1px #ddd;
   padding-left: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 30px; 
   width: 350px;
   float: right;
 }

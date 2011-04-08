@@ -1,11 +1,13 @@
 <h2><%= link_to "Your Groups", groups_url, :class => 'white' %>
 	<% if params[:controller] == 'groups' && params[:action] == 'new' || params[:action] == 'create' %>
 		> New Group
-	<% elsif params[:controller] == 'groups' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show') %>
+	<% elsif params[:controller] == 'groups' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show' || params[:action] == 'edit_memberships') %>
 		>
 		<%= link_to "#{@group.title}", group_url(@group), :class => 'white' %>
 		<% if params[:action] == 'edit' %>
-			> Edit
+			> Edit Group
+		<% elsif params[:action] == 'edit_memberships' %>
+			> Edit Students
 		<% end %>
 	<% end %>
 </h2>

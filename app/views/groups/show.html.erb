@@ -1,4 +1,6 @@
 <div id="left_column">
+	<%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %>
+	<br />
 	<span class="description">
 		<%= @group.description %>
 	</span>

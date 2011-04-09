@@ -42,7 +42,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(params[:group])
     @group.phone_number = get_new_phone_number
-		@page_title = "New Groups"
+    @page_title = "New Groups"
 		
     respond_to do |format|
       if @group.save

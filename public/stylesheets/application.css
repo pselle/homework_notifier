@@ -23,8 +23,27 @@ a:hover { color: #3a8bd6; text-decoration: underline; }
 a:visited { color: #3a8bd6; }
 a:active { color: #3a8bd6; }
 
-a.button { background-color: #3a8bd6; border-radius: 7px; color: white; font-size: 15px; padding: 5px 10px 5px 10px; } 
-
+a.button {
+	background-color: #3a8bd6;
+	border-radius: 7px;
+	color: white;
+	font-size: 15px;
+	padding: 8px 13px 10px 13px;
+	background: -moz-linear-gradient(center bottom, #1969b3 0%, #3a8bd6 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #3a8bd6));
+	text-shadow: 0px -1px 0px #132943;
+	border: 1px solid #5F5F5F;
+	text-decoration: none;
+	cursor: pointer;
+}
+a.button:hover {
+	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #6bb0f0));
+}
+a.button:active {
+	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a8bd6), color-stop(1, #1969b3));
+}
 a.white { color: white; }
 
 .lucky { font-family: 'Luckiest Guy', arial, serif; }

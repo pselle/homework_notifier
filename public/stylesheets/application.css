@@ -61,7 +61,7 @@ table { width: 100%; }
 table.padded { margin-left: 10px; }
 td.top{ vertical-align: top; }
 
-input[type="password"], input[type="email"]{
+input[type="password"], input[type="email"], input[type="text"]{
 	color: dimGray;
 	font-size: 1.3em !important;
 	padding: 6px;
@@ -102,27 +102,6 @@ input.first{
 	color: #28485E;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
-
-/*#alert{
-	margin: 10px;
-	border: 1px solid #993624;
-	background: #CC4831 url("images/messages/error.png") no-repeat 10px center;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	text-align: center;
-	margin: 0 auto 15px;
-	color: white;
-	font-size: 18px;
-	padding: 5px;
-	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
-}*/
-
-
-
 #logo {
 	line-height: 37px;
 	letter-spacing: 1.5px;

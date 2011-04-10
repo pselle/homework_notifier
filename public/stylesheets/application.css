@@ -17,13 +17,14 @@ h1 { font-family: 'Josefin Sans', arial, serif; font-size: 2em;}
 h2 { font-family: 'Josefin Sans', arial, serif; font-size: 1.75em;  }
 h3 { font-family: 'Josefin Sans', arial, serif; font-size: 1.25em; }
 h4 { font-family: 'Josefin Sans', arial, serif; font-size: 1.15em; }
+h5 { font-family: 'Josefin Sans', arial, serif; font-size: .9em; }
 
 a { color: #3a8bd6; text-decoration: none; }
 a:hover { color: #3a8bd6; text-decoration: underline; }
 a:visited { color: #3a8bd6; }
 a:active { color: #3a8bd6; }
 
-a.button, input.button {
+a.button, input.button, input[type=submit] {
 	background-color: #3a8bd6;
 	border-radius: 7px;
 	color: white;
@@ -36,17 +37,19 @@ a.button, input.button {
 	text-decoration: none;
 	cursor: pointer;
 	font-family: Oswald, arial, serif;
-	font-size: 15px;
+	font-size: 15px !important;
 }
-a.button:hover, input:hover.button {
+a.button:hover, input:hover.button, input[type=submit]:hover {
 	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #6bb0f0));
 }
-a.button:active, input:active.button {
+a.button:active, input:active.button, input[type=submit]:active {
 	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a8bd6), color-stop(1, #1969b3));
 }
-textarea.send_message {width: 300px;}
+
+textarea {width: 300px;}
+
 a.white { color: white; }
 
 .lucky { font-family: 'Luckiest Guy', arial, serif; }
@@ -58,10 +61,70 @@ table { width: 100%; }
 table.padded { margin-left: 10px; }
 td.top{ vertical-align: top; }
 
+input[type="password"], input[type="email"]{
+	color: dimGray;
+	font-size: 1.3em !important;
+	padding: 6px;
+	margin-bottom: 20px;
+}
+input.last {
+	margin-bottom: 5px;
+}
+label {
+	color: dimGray;
+}
+input.first{
+	margin-top: 30px;
+}
+
+.flash {
+	margin: 10px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-align: center;
+	margin: 0 auto 15px;
+	color: white;
+	font-size: 18px;
+	padding: 5px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);	
+}
+#alert {
+	border: 1px solid #993624;
+	background: #CC4831 url("images/messages/error.png") no-repeat 10px center;
+}
+#notice {
+	border: 1px solid #8A9DAA;
+	background: #B8D1E2 url("images/messages/notice.png") no-repeat 10px center;
+}
+
+/*#alert{
+	margin: 10px;
+	border: 1px solid #993624;
+	background: #CC4831 url("images/messages/error.png") no-repeat 10px center;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	text-align: center;
+	margin: 0 auto 15px;
+	color: white;
+	font-size: 18px;
+	padding: 5px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
+}*/
+
+
+
 #logo {
-  line-height: 37px;
-letter-spacing: 1.5px;
-text-align: center;      
+	line-height: 37px;
+	letter-spacing: 1.5px;
+	text-align: center;      
 }
 
 #logo_text {
@@ -135,14 +198,23 @@ padding: 15px 10px;
 	text-transform: capitalize;
 }
 #main_menu li:last-child a:hover{
+	text-decoration: underline;
+}
+#sign_in{
+	margin-top: 0px;
+	margin-right: 0px !important;
+}
+#sign_out{
+    margin: 10px 0px 0px 0px !important;
     background-color: #5A5A5A;
     border-bottom-left-radius: 7px;
     border-top-left-radius: 7px;
     padding: 9px 6px 2px 8px;
     color: #fff;
+	line-height: 22px !important;
     text-decoration: none;
 	text-transform: capitalize;
-	text-decoration: underline;
+	cursor: default;
 }
 #account_menu li{
     list-style: none;
@@ -159,13 +231,6 @@ padding: 15px 10px;
 	text-decoration: none;
     color: #5A5A5A;
 	text-transform: lowercase;
-}
-#sign_in{
-	margin-top: 0px;
-	margin-right: 0px !important;
-}
-#sign_out{
-    margin: -10px 0px 0px 0px !important;
 }
 #main {
   margin: 10px 10px 0px 0px;
@@ -223,9 +288,10 @@ padding: 15px 10px;
 	position: relative;
 	top: -1px;
 	left: 10px;
+	text-shadow: 0 1px 0 gray;
 }
 .content{
-	padding: 20px;
+	padding: 15px 20px 20px 20px;
 	position: relative;
 }
 #content_title{

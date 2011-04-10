@@ -77,6 +77,8 @@ input.first{
 	margin-top: 30px;
 }
 
+input.membership_field { width: 335px;}
+
 .flash {
 	margin: 10px;
 	-moz-border-radius: 3px;
@@ -101,6 +103,35 @@ input.first{
 	background: #B8D1E2 url("images/messages/notice.png") no-repeat 10px center;
 	color: #28485E;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.gray_outline { border-bottom: 2px dashed #d3d3d3; margin-bottom: 10px;}
+#error_explanation {
+	width: 95%;
+	padding: 7px;
+	padding-bottom: 0;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	font-size: 14px;
+	margin: -7px;
+	margin-bottom: 0px;
+	background-color: #c00;
+	color: #fff;
+}
+
+#error_explanation ul li {
+	font-size: 12px;
+	list-style: none;
+	padding: 4px;
 }
 #logo {
 	line-height: 37px;

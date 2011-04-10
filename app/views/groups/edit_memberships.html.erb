@@ -34,20 +34,21 @@
 	            </ul>
 	        </div>
 	      <%end%>
-    
+    	<div class="gray_outline">
 	      <div class="field">
 	        <%= sf.label :name %><br />
-	        <%= sf.text_field :name %>
+	        <%= sf.text_field :name, :class => "membership_field last" %>
 	      </div>
 	      <div class="field">
 	        <%= sf.label :phone_number %><br />
-	        <%= sf.text_field :phone_number %>
+	        <%= sf.text_field :phone_number, :class => "membership_field" %>
 	      </div>
+		</div>
 	    <%end%>
 	  <%end%>
 
 	  <div class="actions">
-	    <%= f.submit "Save Member List", :disable_with => "Hold on there, sonny..." %>
+	    <%= f.submit "Add Members To List", :disable_with => "Hold on there, sonny..." %>
 	  </div>
 	<%end%>
 </div>

@@ -141,6 +141,7 @@ class GroupsController < ApplicationController
     message = @group.user.display_name+": "+params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
     numbers = @group.students.map(&:phone_number)
+    numbers << @group.user.phone_number if @group.user.phone_number
 
     if params[:commit].match /scheduled/i
       time_zone = ActiveSupport::TimeZone["Eastern Time (US & Canada)"]  #use eastern time for the input
@@ -168,6 +169,8 @@ class GroupsController < ApplicationController
       numbers = (@group.students-[@sending_student]).map do |student|
         student.phone_number
       end
+      
+      numbers << @group.user.phone_number if @group.user.phone_number
       response = $outbound_flocky.message @group.phone_number, message, numbers
     end
     render :text=> response.to_json, :status=>202

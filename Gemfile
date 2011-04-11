@@ -6,6 +6,7 @@ gem 'rails', '3.0.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'flocky', :git => 'git://github.com/codeforamerica/flocky.git'
+gem 'delayed_job'
 gem 'sqlite3'
 gem 'json'
 gem "compass", ">= 0.10.6"

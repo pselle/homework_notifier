@@ -16,6 +16,12 @@
 	  <div class="actions">
 	    <br /><%= f.submit "Send Message", :class => 'button'%>
 	  </div>
+	  <div class="field">
+	    <%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit "Send Message Scheduled", :class => 'button' %>
+	  </div>
 	<%end%>
 	<br />
 	<%= link_to 'Back', groups_path %>

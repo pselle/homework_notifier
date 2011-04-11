@@ -140,9 +140,18 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     message = params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
-    numbers = @group.students.map { |student| student.phone_number }
+    numbers = @group.students.map(&:phone_number)
+
+    if params[:commit].match /scheduled/i
+      scheduled_run = DateTime.civil(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
+      scheduled_run -= 5.minutes #so we don't accidentally hit anything silly.
+      $outbound_flocky.delay(:run_at=>scheduled_run).message @group.phone_number, message, numbers
+      redirect_to @group, :notice=>"Message successfully scheduled for <time>" #if actually successful, or something
+    else
       response = $outbound_flocky.message @group.phone_number, message, numbers
-    redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
+      redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
+    end
+    
   end
   
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.

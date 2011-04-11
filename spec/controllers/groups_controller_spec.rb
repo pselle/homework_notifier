@@ -92,6 +92,8 @@ describe GroupsController do
   describe "send_message" do
     pending "should send a message to all group members" do
     end
+    pending "should send a message delayed-like" do
+    end
   end
   describe "receive_message" do
     pending "should send a message to all group members except original sender" do

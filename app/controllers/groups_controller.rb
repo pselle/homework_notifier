@@ -164,15 +164,21 @@ class GroupsController < ApplicationController
     params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
     params[:origin_number] = $1 if params[:origin_number]=~/^1(\d{10})$/
     @group=Group.find_by_phone_number(params[:incoming_number])
-    if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
-      message = @sending_student.name+": "+params[:message]
-      numbers = (@group.students-[@sending_student]).map do |student|
-        student.phone_number
-      end
+    
+    if @group
+      sent_by_admin=@group.user.phone_number==params[:origin_number]
+      @sending_student = @group.students.find_by_phone_number(params[:origin_number])
+      if sent_by_admin || @sending_student
+        message = (sent_by_admin ? @group.user.display_name : @sending_student.name)+": "+params[:message]
+        numbers = (@group.students-[@sending_student]).map do |student|
+          student.phone_number
+        end
       
-      numbers << @group.user.phone_number if @group.user.phone_number
-      response = $outbound_flocky.message @group.phone_number, message, numbers
+        numbers << @group.user.phone_number if @group.user.phone_number
+        response = $outbound_flocky.message @group.phone_number, message, numbers
+      end
     end
+    
     render :text=> response.to_json, :status=>202
     #needs to return something API-like, yo
   end

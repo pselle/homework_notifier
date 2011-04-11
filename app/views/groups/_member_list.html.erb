@@ -1,10 +1,11 @@
 <% if @group.students.blank? %>
-	<h4>There are no students associated with this group.</h4>
+	<h5>There are no students in this group.</h5><br>
+	<%= link_to 'Add Students', edit_memberships_of_group_path, :class => 'button' %>
 <% else %>
-	<h4>Your message will be sent to the following recipients:</h4>
+	<h5>Your message will be sent to the following recipients:</h5>
+	<%= link_to 'Edit', edit_memberships_of_group_path, :class => 'button' %>
 <% end %>
 <% for member in @group.students %>
 	<%= member.name %>
 	<br />
 <% end %>
-<%= link_to 'Edit', edit_memberships_of_group_path, :class => 'button' %>

@@ -1,29 +1,16 @@
 <% if @groups.blank? %>
 	<h3>You haven't created any groups.  Please <%= link_to 'click here', new_group_path %> to set one up.</h3>
 <% else %>
-	<table style="clear: both;">
-		<% @groups.each do |group| %>
-			<tr>
-				<td>
-					<div id="content_title">
-						<h4><%= link_to group.title, group_path(group) %></h4>
-					</div>
-				</td>
-				<td>
-					<div class="content_right">
-						<h4><%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %></h4>
-					</div>
-				</td>
-				<td>
-					<div class="content_right">
-						<h4><%= pluralize group.students.count, "member" %></h4>
-					</div>
-				</td>
-			</tr>
-		<% end %>
-		<tr>
-			<td><br /><br /><%= link_to "Add New Group", new_group_path, :class => 'button' %>
-			</td>
-		</tr>
-	</table>
+		<ul>
+			<% @groups.each do |group| %>
+				<li><%= link_to group.title, group_path(group) %>
+					<ul>
+						<li><%= group.description %></li>
+						<li><%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %></li>
+						<li><%= pluralize group.students.count, "member" %></li>
+					</ul>
+				</li>
+			<% end %>
+		</ul>
+	<%= link_to "Add New Group", new_group_path, :class => 'button' %>
 <% end %>

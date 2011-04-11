@@ -1,0 +1,25 @@
+<%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %>
+<br />
+<span class="description">
+	<%= @group.description %>
+</span>
+
+<%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
+  <%= fields_for :message do |mf| %>
+    <div class="field">
+      <%= mf.label :content, "Send a message" %>
+			<br />
+      <span class="formwrap"><%= mf.text_area :content%></span>
+    </div>
+  <%end%>
+  <div class="actions">
+    <br /><%= f.submit "Send Message Now", :class => 'button'%>
+  </div>
+  <div class="field">
+    <%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Send Message Scheduled", :class => 'button' %>
+  </div>
+<%end%>
+<br />

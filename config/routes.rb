@@ -21,8 +21,13 @@ HomeworkNotifier::Application.routes.draw do
   end
 
   # devise_for :users
-  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', }, :controllers=>{:confirmations=>"confirmations"} do
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', }, :controllers=>{:confirmations=>"confirmations"}, :skip=>:registrations do
     put "/users/verification", :to=>"confirmations#update", :as=>:update_user_confirmation
+  end
+  as :user do
+    scope "/users" do
+      resource :profile, :controller=>"devise/registrations", :only=>[:edit,:update]
+    end
   end
   # devise_for :admins, :controllers => { :sessions => "admins/sessions" }
 

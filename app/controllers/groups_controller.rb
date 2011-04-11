@@ -143,10 +143,14 @@ class GroupsController < ApplicationController
     numbers = @group.students.map(&:phone_number)
 
     if params[:commit].match /scheduled/i
-      scheduled_run = DateTime.civil(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
-      scheduled_run -= 5.minutes #so we don't accidentally hit anything silly.
-      $outbound_flocky.delay(:run_at=>scheduled_run).message @group.phone_number, message, numbers
-      redirect_to @group, :notice=>"Message successfully scheduled for <time>" #if actually successful, or something
+      time_zone = ActiveSupport::TimeZone["Eastern Time (US & Canada)"]  #use eastern time for the input
+      
+      scheduled_run = time_zone.local(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
+      
+      #schedule 5 minutes early so we don't accidentally hit anything silly on cron job execution time
+      $outbound_flocky.delay(:run_at=>scheduled_run-5.minutes).message @group.phone_number, message, numbers
+      pretty_time = scheduled_run.strftime("%A, %B %d, %I:%M %p %Z")
+      redirect_to @group, :notice=>"Message successfully scheduled for #{pretty_time}" #if actually successful, or something
     else
       response = $outbound_flocky.message @group.phone_number, message, numbers
       redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something

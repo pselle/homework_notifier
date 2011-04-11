@@ -138,7 +138,7 @@ class GroupsController < ApplicationController
   #POST groups/:id/send_message, sends a message to all members of group
   def send_message
     @group = Group.find(params[:id])
-    message = params[:message][:content] #TODO: safety, parsing, whatever.
+    message = @group.user.display_name+": "+params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
     numbers = @group.students.map(&:phone_number)
 
@@ -155,7 +155,7 @@ class GroupsController < ApplicationController
       response = $outbound_flocky.message @group.phone_number, message, numbers
       redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
     end
-    
+
   end
   
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.

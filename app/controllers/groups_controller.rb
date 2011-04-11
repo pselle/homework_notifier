@@ -142,7 +142,7 @@ class GroupsController < ApplicationController
     #TODO: ensure group found
     numbers = @group.students.map { |student| student.phone_number }
       response = $outbound_flocky.message @group.phone_number, message, numbers
-    redirect_to @group, :notice => response.to_json #or something
+    redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
   end
   
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.

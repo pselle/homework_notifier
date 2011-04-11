@@ -16,7 +16,7 @@
     <br /><%= f.submit "Send Message Now", :class => 'button'%>
   </div>
   <div class="field">
-    <%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
+    <%= select_datetime(DateTime.now+1.hour,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
   </div>
   <div class="actions">
     <%= f.submit "Send Message Scheduled", :class => 'button' %>

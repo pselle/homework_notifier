@@ -26,10 +26,10 @@ a:active { color: #3a8bd6; }
 
 a.button, input.button, input[type=submit] {
 	background-color: #3a8bd6;
-	border-radius: 7px;
+	border-radius: 3px;
 	color: white;
 	font-size: 15px;
-	padding: 8px 13px 10px 13px;
+	padding: 6px 13px 7px 13px;
 	background: -moz-linear-gradient(center bottom, #1969b3 0%, #3a8bd6 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #3a8bd6));
 	text-shadow: 0px -1px 0px #132943;
@@ -38,6 +38,7 @@ a.button, input.button, input[type=submit] {
 	cursor: pointer;
 	font-family: Oswald, arial, serif;
 	font-size: 15px !important;
+	width: 100%;
 }
 a.button:hover, input:hover.button, input[type=submit]:hover {
 	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
@@ -63,8 +64,8 @@ td.top{ vertical-align: top; }
 
 input[type="password"], input[type="email"], input[type="text"]{
 	color: dimGray;
-	font-size: 1.3em !important;
-	padding: 6px;
+	font-size: 1.1em !important;
+	padding: 7px;
 	margin-bottom: 20px;
 }
 input.last {
@@ -78,7 +79,22 @@ input.first{
 }
 
 input.membership_field { width: 335px;}
-
+.formwrap {
+	border: 8px solid #2ea390;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	display: block;
+}
+#message_content {
+	resize: none;
+	border: 1px solid silver;
+	font-size:1.1em;
+	padding: 7px;
+	width: 488px;
+	height: 8.2em;
+	display: block;
+}
 .flash {
 	margin: 10px;
 	-moz-border-radius: 3px;
@@ -114,7 +130,6 @@ input.membership_field { width: 335px;}
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
 }
-
 #error_explanation h2 {
 	text-align: left;
 	font-weight: bold;
@@ -127,7 +142,6 @@ input.membership_field { width: 335px;}
 	background-color: #c00;
 	color: #fff;
 }
-
 #error_explanation ul li {
 	font-size: 12px;
 	list-style: none;

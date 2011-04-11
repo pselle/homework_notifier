@@ -1,24 +1,5 @@
 <div id="left_column">
-	<%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %>
-	<br />
-	<span class="description">
-		<%= @group.description %>
-	</span>
-	
-	<%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
-	  <%= fields_for :message do |mf| %>
-	    <div class="field">
-	      <%= mf.label :content, "Message:" %>
-				<br />
-	      <%= mf.text_area :content, :rows=>5,:cols=>20 %>
-	    </div>
-	  <%end%>
-	  <div class="actions">
-	    <br /><%= f.submit "Send Message", :class => 'button'%>
-	  </div>
-	<%end%>
-	<br />
-	<%= link_to 'Back', groups_path %>
+	<%= render :partial => 'send_message' %>
 </div>
 <div id="right_column">
 	<%= render :partial => 'member_list' %>

@@ -5,7 +5,7 @@
 	<h5>Your message will be sent to <%= pluralize @group.students.count, "member" %>:</h5>
 	<ul id="student_list">
     <% for member in @group.students %>
-    	<li><%= member.name %></li>
+    	<li><%= member.name %> <%= link_to 'X', remove_student_from_group_path(@group.id, :student_id => member.id), :confirm => 'Are you sure?', :method => :delete, :class => 'button minor secondary' %></li>
     <% end %>
     <li>
       <%= link_to 'New', new_group_student_path(@group), :class => 'button minor' %>

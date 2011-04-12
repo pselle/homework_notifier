@@ -6,11 +6,19 @@ body.bp {
   background: none;
   font-size: 10pt;
 }
+<<<<<<< HEAD
 /* line 52, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
 body.bp .container {
   background: none;
 }
 /* line 54, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 52, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp .container {
+  background: none;
+}
+/* line 54, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp hr {
   background: #cccccc;
   color: #cccccc;
@@ -20,41 +28,70 @@ body.bp hr {
   padding: 0;
   border: none;
 }
+<<<<<<< HEAD
 /* line 62, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 62, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp hr.space {
   background: white;
   color: white;
 }
+<<<<<<< HEAD
 /* line 65, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
 body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 /* line 67, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 65, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp h1, body.bp h2, body.bp h3, body.bp h4, body.bp h5, body.bp h6 {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+/* line 67, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp code {
   font-size: 0.9em;
   font-family: "andale mono", "lucida console", monospace;
 }
+<<<<<<< HEAD
 /* line 72, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
 body.bp a img {
   border: none;
 }
 /* line 75, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 72, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp a img {
+  border: none;
+}
+/* line 75, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp a:link, body.bp a:visited {
   background: transparent;
   font-weight: 700;
   text-decoration: underline;
 }
+<<<<<<< HEAD
 /* line 79, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
 body.bp p img.top {
   margin-top: 0;
 }
 /* line 81, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 79, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp p img.top {
+  margin-top: 0;
+}
+/* line 81, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp blockquote {
   margin: 1.5em;
   padding: 1em;
   font-style: italic;
   font-size: 0.9em;
 }
+<<<<<<< HEAD
 /* line 86, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
 body.bp .small {
   font-size: 0.9em;
@@ -68,6 +105,21 @@ body.bp .quiet {
   color: #999999;
 }
 /* line 92, ../../../../../.rvm/gems/ruby-1.9.2-p180@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+=======
+/* line 86, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp .small {
+  font-size: 0.9em;
+}
+/* line 88, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp .large {
+  font-size: 1.1em;
+}
+/* line 90, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+body.bp .quiet {
+  color: #999999;
+}
+/* line 92, ../../../../../../../.rvm/gems/ruby-1.9.2-p136@homework_notifier_dev/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_print.scss */
+>>>>>>> Fixed jquery rails implementation and added remove student ability to group
 body.bp .hide {
   display: none;
 }

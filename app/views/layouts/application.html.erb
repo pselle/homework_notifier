@@ -38,7 +38,7 @@
 		<ul id="account_menu">
 			<% if current_user %>
 				<li><%= link_to "Sign out", destroy_user_session_path %></li>
-				<li><%= link_to "Edit account", "/users/verification" %></li>
+				<li><%= link_to "Edit account", "/users/#{current_user.id}/edit" %></li>
 			<% end %>
 		</ul>
   </div>
@@ -53,6 +53,9 @@
 				<%= yield %>
 			</div>
 		</div>
-  </div> 
+  </div>
+  <div id="footer">
+    <span>made by <a href="http://codeforamerica.org">Code for America</a> in partnership with the <a href="http://www.newurbanmechanics.org">City of Boston</a></span>
+	</div>
 </body> 
 </html>

@@ -12,9 +12,14 @@
 
 <p>
   <b>Groups:</b>
-  <%= @student.groups.map {|g| link_to g.description, g,:escape=>false}*', ' %>
+  <br />
+  <ul>
+  <% for group in @student.groups %>
+    <li><%= link_to group.title, group_path %></li>
+  <% end %>
+  </ul>
 </p>
+<br />
 
-
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to 'Edit', edit_group_student_path(@group, @student) %> |
+<%= link_to 'Back', group_students_path(@group) %>

@@ -1,13 +1,24 @@
-<h2 class="oswald" ><%= link_to "Groups", groups_url, :class => 'white' %>
-	<% if params[:controller] == 'groups' && params[:action] == 'new' || params[:action] == 'create' %>
-		> New Group
-	<% elsif params[:controller] == 'groups' && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show' || params[:action] == 'edit_memberships') %>
-		>
-		<%= link_to "#{@group.title}", group_url(@group), :class => 'white' %>
-		<% if params[:action] == 'edit' %>
-			> Edit Group
-		<% elsif params[:action] == 'edit_memberships' %>
-			> Edit Students
-		<% end %>
-	<% end %>
+<h2 class="oswald" >
+    <% if current_user %>	
+        <%= link_to "Groups", groups_url, :class => 'white' %>
+    	<% if (params[:controller] == 'groups') && (params[:action] == 'new' || params[:action] == 'create') %>
+    		> New Group
+    	<% elsif (params[:controller] == 'groups') && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show' || params[:action] == 'edit_memberships') %>
+    		> <%= link_to "#{@group.title}", group_url(@group), :class => 'white' %>
+    		<% if params[:action] == 'edit' %>
+    			> Edit Group
+    		<% elsif params[:action] == 'edit_memberships' %>
+    			> Edit Members
+    		<% end %>
+    	<% elsif params[:controller] == 'students' %>
+    		> <%= link_to "#{@group.title}", group_url(@group), :class => 'white' %>
+    		<% if params[:action] == 'edit' || params[:action] == 'update' %>
+    			<span class="noclick">> Edit Member</span>
+    		<% elsif params[:action] == 'new' || params[:action] == 'create' %>
+    			<span class="noclick">> Add Member</span>
+    		<% end %>
+    	<% end %>
+    <% else %>
+        <span class="noclick">Homework Notifier</span>
+    <% end %>
 </h2>

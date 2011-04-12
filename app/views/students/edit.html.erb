@@ -1,6 +1,7 @@
 <h1>Editing student</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+<%= form_for(:student, :url => group_student_path(@group, @student), :html => {:method => :put}) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+<%= link_to 'Show', group_student_path(@group) %> |
+<%= link_to 'Back', group_students_path(@group) %>

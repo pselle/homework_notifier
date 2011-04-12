@@ -1,8 +1,10 @@
 class StudentsController < ApplicationController
+  before_filter :load_group
+  
   # GET /students
   # GET /students.xml
   def index
-    @students = Student.includes(:groups).all
+    @students = @group.students
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +46,8 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to(@student, :notice => 'Student was successfully created.') }
+        @group.students << @student unless @group.students.include? @student
+        format.html { redirect_to(group_students_url(@group), :notice => 'Student was successfully created.') }
         format.xml  { render :xml => @student, :status => :created, :location => @student }
       else
         format.html { render :action => "new" }
@@ -60,7 +63,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.update_attributes(params[:student])
-        format.html { redirect_to(@student, :notice => 'Student was successfully updated.') }
+        format.html { redirect_to(group_students_url(@group), :notice => 'Student was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +79,7 @@ class StudentsController < ApplicationController
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to(students_url) }
+      format.html { redirect_to(group_students_url(@group)) }
       format.xml  { head :ok }
     end
   end
@@ -93,5 +96,10 @@ class StudentsController < ApplicationController
         format.xml  { render :xml => @student.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  private
+  def load_group
+    @group = Group.find(params[:group_id])
   end
 end

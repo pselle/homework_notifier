@@ -37,7 +37,7 @@ a.button, input.button, input[type=submit] {
 	text-decoration: none;
 	cursor: pointer;
 	font-family: Oswald, arial, serif;
-	font-size: 15px !important;
+	font-size: 15px;
 	font-weight: normal;
 }
 a.button:hover, input:hover.button, input[type=submit]:hover {
@@ -63,6 +63,10 @@ a.button.secondary:hover, input:hover.button.secondary {
 a.button.secondary:active, input:active.button.secondary {
 	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #969696), color-stop(1, #676767));
+}
+a.button.minor {
+	font-size: 12px;
+	padding: 4px 13px 5px 13px;
 }
 
 textarea {
@@ -140,6 +144,14 @@ input.membership_field { width: 335px;}
 	overflow: hidden;
 	margin-top: 9px;
 	height: 25px;
+}
+#student_list {
+	list-style: none;
+	padding: 10px 0px 5px 15px;
+}
+#student_list li:last-child{
+	margin-top: 10px;
+	text-align: left;
 }
 .flash {
 	margin: 10px;

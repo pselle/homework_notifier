@@ -112,17 +112,23 @@ class GroupsController < ApplicationController
   #for now, acts more like 'add members'
   def update_memberships
     @group = Group.find(params[:id])
-
-    @students = params[:students].reject {|s| s.values.all?(&:blank?)}.map do |student_params|
+    @students = @group.students
+    
+    # create a combined array that includes the params plus the student ids
+    students_with_ids = params[:students].zip(@students.map {|x| x.id})
+    
+    students_with_ids.map do |student_and_id|
+      student_params = student_and_id[0]
+      id = student_and_id[1]
       student_params[:phone_number] = PhoneValidator::massage_number(student_params[:phone_number])
-      Student.find_or_initialize_by_phone_number(student_params)
+      Student.find(id).update_attributes(:name => student_params[:name], :phone_number => student_params[:phone_number])
     end
     
     respond_to do |format|
            #does the map, so that we don't short circuit
       if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
         #it succeeded
-        format.html { redirect_to :group, :notice=>"#{@students.count} students added successfully"}
+        format.html { redirect_to :group, :notice => "#{@students.count} students added successfully"}
         format.xml  {head "ok"}
       else
         format.html {render :action=>:edit_memberships}
@@ -132,7 +138,7 @@ class GroupsController < ApplicationController
   end
   def edit_memberships
     @group = Group.find(params[:id])
-    @students=[Student.new]*10
+    @students = @group.students
   end
   
   #POST groups/:id/send_message, sends a message to all members of group

@@ -51,17 +51,17 @@ a.button:active, input:active.button, input[type=submit]:active {
 a.button.secondary, input.button.secondary {
 	background-color: #676767;
 	color: white;
-	background: -moz-linear-gradient(center bottom, #1969b3 0%, #3a8bd6 100%);
+	background: -moz-linear-gradient(center bottom, #676767 0%, #969696 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #676767), color-stop(1, #969696));
 	text-shadow: 0px -1px 0px #132943;
 	border: 1px solid #5F5F5F;
 }
 a.button.secondary:hover, input:hover.button.secondary {
-	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
+	background: -moz-linear-gradient(center bottom, #676767 0%, #aaaaaa 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #676767), color-stop(1, #aaaaaa));
 }
 a.button.secondary:active, input:active.button.secondary {
-	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
+	background: -moz-linear-gradient(center bottom, #969696 0%, #676767 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #969696), color-stop(1, #676767));
 }
 a.button.minor {

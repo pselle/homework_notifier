@@ -102,8 +102,9 @@ class GroupsController < ApplicationController
   def remove_student
     @group = Group.find(params[:id])
     @student=Student.find(params[:student_id])
-    @group.students.delete(@student)
+    @group.students.delete(@student)  
     respond_to do |format|
+      format.html { redirect_to(group_path(@group), :notice => @student.name + ' was successfully removed.') }
       format.xml {head "ok"}
     end
   end

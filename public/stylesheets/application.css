@@ -220,7 +220,7 @@ input.membership_field { width: 315px;}
 
 #logo_text {
   position: relative;
-  top: 25px;
+  top: 7px;
 }
 
 #logo #top {
@@ -240,14 +240,14 @@ input.membership_field { width: 315px;}
 	padding: 15px 10px 5px 10px;
 }
 #logo {
-	width: 220px;
+	width: 170px;
 	height: 75px;
 	margin: 0 10px 10px 0;
-	background-color: #5A5A5A;
+	background-color: #fff;
 	float: left;
 }
 #nav {
-  width: 700px;
+  width: 750px;
   height: 75px; /*should be 75*/
   background-color: #FFF;
   margin: 0 0 10px 10px;

@@ -14,44 +14,20 @@
   <%= csrf_meta_tag %>
 </head> 
 <body>
-  <script type="text/javascript" charset="utf-8">
-    var is_ssl = ("https:" == document.location.protocol);
-    var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-    document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-
-  <script type="text/javascript" charset="utf-8">
-    var feedback_widget_options = {};
-
-    feedback_widget_options.display = "overlay";  
-    feedback_widget_options.company = "code_for_america";
-    feedback_widget_options.placement = "left";
-    feedback_widget_options.color = "#2ea390";
-    feedback_widget_options.style = "problem";
-    feedback_widget_options.product = "code_for_america_homework_notifier";
-
-
-
-
-    feedback_widget_options.limit = "3";
-
-
-    var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-  </script>
   <div id="container"> 
     <div id="logo">
-  		<a href="/">
-  			  <div id="logo_text">
-  			    <img src="images/cfa_logo.png" alt="Code for America">
-  				<!-- <h1 id="top" class="lucky white">HW2TXT</h1> -->
-  				</div>
-  		</a>
+		<div id="logo_text">
+			<a href="/">
+				<h1 id="top" class="lucky white">HW2TXT</h1>
+			</a>
+		</div>
     </div>
     <div id="nav">
         <ul id="main_menu">
             <h3>
 	        <li><%= link_to "Groups", groups_path %></li>
             <li><a href="http://codeforamerica.org/?cfa_project=whatsassign-me" class="nav_links">ABOUT</a></li>
+            <li><a href="help.html" class="nav_links" title="Send us a message with ideas or problems!">SUBMIT FEEDBACK</a></li>
 			<% if current_user %>
 				<li id="sign_out"><%= current_user.name %></li>
 			<% else %>
@@ -69,7 +45,7 @@
 		<div id="main">
 			<div class="header">
 				<div class="title_text">
-					<%= render :partial => 'layouts/breadcrumbs' %>
+					Submit Feedback
 				</div>
 			</div>
 			<div class="content">

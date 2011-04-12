@@ -1,5 +1,5 @@
 <% if @groups.blank? %>
-	<h3>You haven't created any groups.  Please <%= link_to 'click here', new_group_path %> to set one up.</h3>
+	<h3>You haven't yet created any groups.</h3><br><%= link_to 'Make my first group!', new_group_path, :class => "button" %>
 <% else %>
 			<% @groups.each do |group| %>
 				<a class="group_list_item" href="<%= group_path(group) %>">

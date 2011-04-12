@@ -38,6 +38,7 @@ a.button, input.button, input[type=submit] {
 	cursor: pointer;
 	font-family: Oswald, arial, serif;
 	font-size: 15px !important;
+	font-weight: normal;
 }
 a.button:hover, input:hover.button, input[type=submit]:hover {
 	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
@@ -64,7 +65,18 @@ a.button.secondary:active, input:active.button.secondary {
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #969696), color-stop(1, #676767));
 }
 
-textarea {width: 300px;}
+textarea {
+	resize: none;
+	border: 1px solid #aaaaaa;
+	font-size:1.1em;
+	padding: 7px;
+	width: 335px;
+	height: 2.5em;
+	display: block;
+	background-color: #fff;
+	margin-bottom: 20px;
+	background-origin: padding-box;
+}
 
 a.white { color: white; }
 
@@ -76,23 +88,14 @@ a.white { color: white; }
 table { width: 100%; }
 table.padded { margin-left: 10px; }
 td.top{ vertical-align: top; }
-
 input[type="password"], input[type="email"], input[type="text"]{
-	color: dimGray;
 	font-size: 1.1em !important;
 	padding: 7px;
 	margin-bottom: 20px;
 }
-input.last {
-	margin-bottom: 5px;
-}
-label {
-	color: dimGray;
-}
-input.first{
-	margin-top: 30px;
-}
-
+input.last { margin-bottom: 5px; }
+label { color: dimGray; }
+input.first{ margin-top: 30px; }
 input.membership_field { width: 335px;}
 .formwrap {
 	border: 8px solid #d3d3d3;
@@ -112,8 +115,7 @@ input.membership_field { width: 335px;}
 	display: block;
 	background-color: #fff;
 }
-#bar
-{
+#bar {
 	background-color:#3a8bd6;
 	width:0px;
 	height:16px;

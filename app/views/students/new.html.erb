@@ -4,9 +4,9 @@
 <div id="right_column">
   <h1>New Member</h1>
   <div class="left">
-    <%= form_for(:student, :url => group_students_path(@group), :html => {:method => :post}) do |f| %>
+    <div><%= form_for(:student, :url => group_students_path(@group), :html => {:method => :post}) do |f| %>
         <%= render :partial => 'form', :locals => {:f => f} %>
-        <%= link_to 'Cancel', group_students_path(@group), :class => "button secondary" %>
+        <%= link_to 'Cancel', group_path(@group), :class => "button secondary" %></div>
     <% end %>
   </div>
 </div>

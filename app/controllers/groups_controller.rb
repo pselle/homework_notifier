@@ -46,7 +46,7 @@ class GroupsController < ApplicationController
 		
     respond_to do |format|
       if @group.save
-        format.html { redirect_to(edit_memberships_of_group_path(@group), :notice => 'Group was successfully created.') }
+        format.html { redirect_to(group_path(@group), :notice => 'Group was successfully created.') }
         format.xml  { render :xml => @group, :status => :created, :location => @group }
       else
         #TODO: find a better, less API-intensive way to ensure we don't abuse our tropo provisioning
@@ -128,7 +128,7 @@ class GroupsController < ApplicationController
            #does the map, so that we don't short circuit
       if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
         #it succeeded
-        format.html { redirect_to :group, :notice => "#{@students.count} students added successfully"}
+        format.html { redirect_to :group, :notice => "#{@students.count} students updated successfully"}
         format.xml  {head "ok"}
       else
         format.html {render :action=>:edit_memberships}

@@ -100,7 +100,7 @@ input[type="password"], input[type="email"], input[type="text"]{
 input.last { margin-bottom: 5px; }
 label { color: dimGray; }
 input.first{ margin-top: 30px; }
-input.membership_field { width: 335px;}
+input.membership_field { width: 315px;}
 .formwrap {
 	border: 8px solid #d3d3d3;
 	border-radius: 4px;
@@ -426,6 +426,7 @@ input.membership_field { width: 335px;}
 .noclick {
     cursor: default;
 }
+#return_to_groups { height: 90px; clear: both; }
 .content{
 	padding: 15px 20px 20px 20px;
 	position: relative;
@@ -463,7 +464,7 @@ input.membership_field { width: 335px;}
   padding-left: 20px;
   padding-bottom: 20px;
   margin-bottom: 30px; 
-  width: 350px;
+  width: 335px;
   float: right;
 }
 #footer {

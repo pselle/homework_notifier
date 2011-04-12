@@ -1,6 +1,6 @@
 <% if @group.students.blank? %>
-	<h5>There are no students in this group.</h5><br>
-	<%= link_to 'Add Member', new_group_student_path(@group), :class => 'button right' %>
+	<h5>There are no members in this group.</h5>
+	<%= link_to 'New Member', new_group_student_path(@group), :class => 'button left minor' %>
 <% else %>
 	<h5>Your message will be sent to <%= pluralize @group.students.count, "member" %>:</h5>
 	<ul id="student_list">

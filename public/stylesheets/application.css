@@ -145,6 +145,13 @@ input.membership_field { width: 335px;}
 	margin-top: 9px;
 	height: 25px;
 }
+#message_send_options { margin-top: 2px }
+#send_message_now {
+	width: 222px;
+	height: 61px;
+	margin-top: 8px
+}
+#send_message_scheduled { width: 290px }
 #student_list {
 	list-style: none;
 	padding: 10px 0px 5px 15px;

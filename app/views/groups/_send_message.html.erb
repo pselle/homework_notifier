@@ -41,14 +41,14 @@
 	</span>
     </div>
   <%end%>
-  <div class="left">
-    <br /><%= f.submit "Send Message Now", :class => 'button'%>
-  </div>
-  <div class="right">
-    <%= f.submit "Send Message Later", :class => 'button secondary' %>
-  </div>
-  <div class="right">
-    <%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
+  <div>
+      <div id="message_send_options">
+          <div class="left"><%= f.submit "Send Message Now", :class => 'button', :id => 'send_message_now' %></div>
+          <div>
+              <span class="right"><%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %></span>
+              <%= f.submit "Send Message at Above Scheduled Time", :class => 'right button secondary', :id => 'send_message_scheduled'%>
+          </div>
+    </div>
   </div>
 <%end%>
 <br />

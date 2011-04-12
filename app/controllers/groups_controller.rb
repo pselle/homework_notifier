@@ -144,20 +144,25 @@ class GroupsController < ApplicationController
   #POST groups/:id/send_message, sends a message to all members of group
   def send_message
     @group = Group.find(params[:id])
-    message = params[:message][:content] #TODO: safety, parsing, whatever.
+    message = @group.user.display_name+": "+params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
     numbers = @group.students.map(&:phone_number)
+    numbers << @group.user.phone_number if @group.user.phone_number
 
     if params[:commit].match /scheduled/i
-      scheduled_run = DateTime.civil(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
-      scheduled_run -= 5.minutes #so we don't accidentally hit anything silly.
-      $outbound_flocky.delay(:run_at=>scheduled_run).message @group.phone_number, message, numbers
-      redirect_to @group, :notice=>"Message successfully scheduled for <time>" #if actually successful, or something
+      time_zone = ActiveSupport::TimeZone["Eastern Time (US & Canada)"]  #use eastern time for the input
+      
+      scheduled_run = time_zone.local(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
+      
+      #schedule 5 minutes early so we don't accidentally hit anything silly on cron job execution time
+      $outbound_flocky.delay(:run_at=>scheduled_run-5.minutes).message @group.phone_number, message, numbers
+      pretty_time = scheduled_run.strftime("%A, %B %d, %I:%M %p %Z")
+      redirect_to @group, :notice=>"Message successfully scheduled for #{pretty_time}" #if actually successful, or something
     else
       response = $outbound_flocky.message @group.phone_number, message, numbers
       redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
     end
-    
+
   end
   
   #POST groups/receive_message, receives a message as a JSON post, and figures out what to do with it.
@@ -165,13 +170,21 @@ class GroupsController < ApplicationController
     params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
     params[:origin_number] = $1 if params[:origin_number]=~/^1(\d{10})$/
     @group=Group.find_by_phone_number(params[:incoming_number])
-    if @group && @sending_student = @group.students.find_by_phone_number(params[:origin_number])
-      message = @sending_student.name+": "+params[:message]
-      numbers = (@group.students-[@sending_student]).map do |student|
-        student.phone_number
+    
+    if @group
+      sent_by_admin=@group.user.phone_number==params[:origin_number]
+      @sending_student = @group.students.find_by_phone_number(params[:origin_number])
+      if sent_by_admin || @sending_student
+        message = (sent_by_admin ? @group.user.display_name : @sending_student.name)+": "+params[:message]
+        numbers = (@group.students-[@sending_student]).map do |student|
+          student.phone_number
+        end
+      
+        numbers << @group.user.phone_number if @group.user.phone_number
+        response = $outbound_flocky.message @group.phone_number, message, numbers
       end
-      response = $outbound_flocky.message @group.phone_number, message, numbers
     end
+    
     render :text=> response.to_json, :status=>202
     #needs to return something API-like, yo
   end

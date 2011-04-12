@@ -44,8 +44,13 @@
   <div class="left">
     <br /><%= f.submit "Send Message Now", :class => 'button'%>
   </div>
+<<<<<<< HEAD
   <div class="right">
     <%= f.submit "Send Message Later", :class => 'button secondary' %>
+=======
+  <div class="field">
+    <%= select_datetime(DateTime.now+1.hour,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>
+>>>>>>> a7436e5bbeeed94c19193e3b9c11fb43b40fd416
   </div>
   <div class="right">
     <%= select_datetime(DateTime.now,:discard_minute=>true, :start_year=>Date.today.year,:end_year=>Date.today.year+1) %>

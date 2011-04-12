@@ -1,25 +1,4 @@
-<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$("#message_content").keyup(function()
-		{
-		var box=$(this).val();
-		var main = box.length *100;
-		var value= (main / <%= 160 - current_user.display_name.length %>);
-		var count= box.length;
 
-		if(box.length <= <%= 160 - current_user.display_name.length %>)
-		{
-			$('#count').html(count + ' / ' + <%= 160 - current_user.display_name.length %>);
-			$('#bar').animate(
-				{
-				"width": value+'%',
-				}, 1);
-		}
-		return false;
-		});
-	});
-</script>
 
 <h4><span class="left"><%= @group.description %></span>
 <span class="right"><%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %></span></h4>

@@ -25,7 +25,9 @@ HomeworkNotifier::Application.routes.draw do
   end
   as :user do
     scope "/users" do
-      resource :profile, :controller=>"devise/registrations", :only=>[:edit,:update]
+      resource :profile, :controller=>"registrations", :only=>[:edit,:update] do
+        get "edit_password", :as=>"edit_password_of"
+      end
     end
   end
   # devise_for :admins, :controllers => { :sessions => "admins/sessions" }

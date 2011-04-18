@@ -84,20 +84,6 @@ class StudentsController < ApplicationController
     end
   end
   
-  #PUT. intended for AJAX calls
-  def find_or_create
-    #finds or creates by phone number. TODO: also/alternatively by name?
-    params[:student][:phone_number] = PhoneValidator::massage_number(params[:student][:phone_number])
-    @student = Student.find_or_initialize_by_phone_number(params[:student])
-    respond_to do |format|
-      if @student.save
-        format.xml  { render :xml => @student, :status => :created, :location => @student }
-      else
-        format.xml  { render :xml => @student.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-  
   private
   def load_group
     @group = Group.find(params[:group_id])

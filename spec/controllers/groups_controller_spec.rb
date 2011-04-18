@@ -11,9 +11,9 @@ describe GroupsController do
     before :each do
       login
     end    
-    it "after successful create, should redirect to the edit memberships page" do
+    it "after successful create, should redirect to the edit page" do
       post :create
-      response.should redirect_to(edit_attributes_of_group_path(assigns[:group].id)) # Ugly hardcoded id !!
+      response.should redirect_to(edit_group)
     end
   end
   
@@ -52,7 +52,7 @@ describe GroupsController do
     
     it "on success, should redirect to edit page" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}
-      response.should redirect_to(:edit_attributes_of_group)
+      response.should redirect_to(:edit_group)
     end
     it "on success, should have no errors" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}
@@ -76,8 +76,8 @@ describe GroupsController do
       }.to change(Student,:count).by(1) #as opposed to 2
       
       @group.students.count.should == 2
-      response.should redirect_to(:edit_attributes_of_group)
-      assigns[:students].each {|s| s.errors.should be_empty}
+      response.should redirect_to(:edit_group)
+      assigns[:group].errors.should be_empty
     end
     
     it "should check for existing students, agnostic of original phone number input formatting" do

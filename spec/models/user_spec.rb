@@ -16,9 +16,14 @@ describe User do
     u.password.should be_blank
     u.should be_valid
   end
-  pending "does require profile info after confirmation" do
+  it "does require profile info after confirmation email is sent" do
+    u=User.create(:email=>"email@yeaaah.com")
+    u.should_not be_valid
   end
-  pending "can be confirmed" do
+  it "can be confirmed" do
+    u=User.create(:email=>"email@yeaaah.com")
+    u.confirm!
+    u.should be_confirmed
   end
   pending "disallows sign-in before confirmation" do
   end

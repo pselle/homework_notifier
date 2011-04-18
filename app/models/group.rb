@@ -1,7 +1,6 @@
 class Group < ActiveRecord::Base
   belongs_to :user
-  has_many :memberships, :dependent=>:destroy
-  has_many :students, :through=> :memberships
+  has_many :students
 
   validates_phone_number :phone_number
 end

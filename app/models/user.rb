@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   #this represents, for now, a teacher with access to the system.
   #a user can create groups, and add students to those groups
 
-  belongs_to :groups
+  has_many :groups
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

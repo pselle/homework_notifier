@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe GroupsController do
+
   describe "authorization" do
     pending "all actions should be accessible to logged in users" do
     end
@@ -23,6 +24,46 @@ describe GroupsController do
     @member1 = Factory.create(:student)
     @group.students << @member1
   end
+  
+  describe "boilerplate functionality" do
+    describe "index"
+      it "should set @groups" do
+        get :index
+        assigns[:groups].should_not be_nil
+      end
+      pending "should be limited to currently logged in user's groups only" do
+      end
+    end
+    
+    describe "show/edit" do
+      it "should set @group and a @page_title" do
+      [:show,:edit].each do |meth|
+        get meth, {:id=>@group.id}
+        assigns[:group].should_not be_nil
+        assigns[:page_title].should_not be_nil
+      end
+      pending "should only show if it's the currently logged in user's group" do
+      end
+    end
+    
+    it "new should give us a new @group" do
+      get :new
+      assigns[:group].should_not be_nil
+      assigns[:group].should be_new_record
+    end
+    describe "delete" do
+      it "should delete group, and dependent students" do
+        expect {
+          delete :destroy, {:id=>@group.id}
+        }.to change(Student,:count).by(-1)
+        Group.find_by_id(@group.id).should be_nil
+      end
+      pending "should only delete if it's the currently logged in user's group" do
+      end
+      
+    end
+  end
+  
   
   describe "#update" do
     it "should create students based on passed in parameters" do

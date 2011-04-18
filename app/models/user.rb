@@ -17,9 +17,6 @@ class User < ActiveRecord::Base
   
   validates_presence_of :password_confirmation, :if=>:password_required?
   private
-  def has_password?
-    self.encrypted_password.present? or (self.password.present? and self.password_confirmation.present?)
-  end
   def password_required?
     (confirmation_sent_at? && encrypted_password.blank?) || password.present? || password_confirmation.present?
   end

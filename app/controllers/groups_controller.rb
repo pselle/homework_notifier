@@ -69,6 +69,7 @@ class GroupsController < ApplicationController
     
     respond_to do |format|
       if @group.update_attributes(params[:group])
+        @group.reload if @group.students.any?(&:marked_for_destruction?)
         format.html { redirect_to(groups_url, :notice => 'Group was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -88,59 +89,7 @@ class GroupsController < ApplicationController
     end
   end
   
-  #put. add single student, by :student_id
-  def add_student
-    @group = Group.find(params[:id])
-    @student=Student.find(params[:student_id])
-    @group.students << @student unless @group.students.include? @student
-    respond_to do |format|
-      format.xml {head "ok"}#TODO: better return
-    end
-  end 
-  
-  #delete. remove single student, by :student_id
-  def remove_student
-    @group = Group.find(params[:id])
-    @student=Student.find(params[:student_id])
-    @group.students.delete(@student)
-    respond_to do |format|
-      format.xml {head "ok"}
-    end
-  end
-  
-  
-  #for now, acts more like 'add members'
-  def update_memberships
-    @group = Group.find(params[:id])
-    @students = @group.students
-    
-    # create a combined array that includes the params plus the student ids
-    students_with_ids = params[:students].zip(@students.map {|x| x.id})
-    
-    students_with_ids.map do |student_and_id|
-      student_params = student_and_id[0]
-      id = student_and_id[1]
-      student_params[:phone_number] = PhoneValidator::massage_number(student_params[:phone_number])
-      Student.find(id).update_attributes(:name => student_params[:name], :phone_number => student_params[:phone_number])
-    end
-    
-    respond_to do |format|
-           #does the map, so that we don't short circuit
-      if (@students.map(&:valid?).all? && @students.all?(&:save) && @group.students += @students)
-        #it succeeded
-        format.html { redirect_to :group, :notice => "#{@students.count} students updated successfully"}
-        format.xml  {head "ok"}
-      else
-        format.html {render :action=>:edit_memberships}
-        format.xml  { render :xml => @students.map(&:errors), :status => :unprocessable_entity }
-      end
-    end
-  end
-  def edit_memberships
-    @group = Group.find(params[:id])
-    @students = @group.students
-  end
-  
+
   #POST groups/:id/send_message, sends a message to all members of group
   def send_message
     @group = Group.find(params[:id])

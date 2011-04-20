@@ -16,7 +16,7 @@ describe GroupsController do
       controller.should_receive(:get_new_phone_number).and_return("5556667777")
       post :create
       assigns[:group].should_not be_nil
-      response.should redirect_to(group_path(assigns[:group].id))
+      response.should redirect_to(assigns[:group])
     end
   end
   
@@ -94,9 +94,9 @@ describe GroupsController do
       assigns[:group].students.should be_empty
     end
     
-    it "on success, should redirect to index" do
+    it "on success, should redirect to current group's page" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}
-      response.should redirect_to(:groups)
+      response.should redirect_to(@group)
     end
     it "on success, should have no errors" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}

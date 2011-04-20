@@ -70,7 +70,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update_attributes(params[:group])
         @group.reload if @group.students.any?(&:marked_for_destruction?)
-        format.html { redirect_to(groups_url, :notice => 'Group was successfully updated.') }
+        format.html { redirect_to(@group, :notice => 'Group was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

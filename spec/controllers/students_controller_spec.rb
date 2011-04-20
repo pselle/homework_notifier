@@ -8,7 +8,7 @@ describe StudentsController do
     end
   end
   
-  describe "find_or_createt" do
+  describe "find_or_create" do
     before(:each) do
       login
       @student = Factory.create(:student)

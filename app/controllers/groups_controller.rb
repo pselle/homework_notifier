@@ -125,11 +125,9 @@ class GroupsController < ApplicationController
       @sending_student = @group.students.find_by_phone_number(params[:origin_number])
       if sent_by_admin || @sending_student
         message = (sent_by_admin ? @group.user.display_name : @sending_student.name)+": "+params[:message]
-        numbers = (@group.students-[@sending_student]).map do |student|
-          student.phone_number
-        end
+        numbers = (@group.students-[@sending_student]).map(&:phone_number)
       
-        numbers << @group.user.phone_number if @group.user.phone_number
+        numbers << @group.user.phone_number if @group.user.phone_number unless sent_by_admin
         response = $outbound_flocky.message @group.phone_number, message, numbers
       end
     end

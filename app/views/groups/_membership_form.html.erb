@@ -1,28 +1,17 @@
-<%= form_for(@group,:url=>:update_memberships_of_group) do |f| %>
-  <% @students.each_with_index do |student, index| %>
-    <% student.id=nil %>
-    <%= fields_for("students[]",student) do |sf|%>
-      <% if student.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-            <ul>
-              <% student.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-        </div>
-      <%end%>
-    
-      <div class="field">
-        <%= sf.label :name %><br />
-        <%= sf.text_field :name, :class => "membership_field" %>
-      </div>
-      <div class="field">
-        <%= sf.label :phone_number %><br />
-        <%= sf.text_field :phone_number, :class => "membership_field" %>
-      </div>
-			<br />
-    <%end%>
+<%= form_for @group do |f| %>
+
+  <%= f.fields_for :students do |sf|%>
+
+    <div class="field">
+      <%= sf.label :name %><br />
+      <%= sf.text_field :name, :class => "membership_field" %>
+    </div>
+    <div class="field">
+      <%= sf.label :phone_number %><br />
+      <%= sf.text_field :phone_number, :class => "membership_field" %>
+    </div>
+    <br />
+  
   <%end%>
 
   <div class="actions">

@@ -11,10 +11,12 @@ describe GroupsController do
   describe "#create" do
     before :each do
       login
-    end    
-    it "after successful create, should redirect to the edit page" do
+    end
+    it "after successful create, should redirect to the show page" do
+      controller.should_receive(:get_new_phone_number).and_return("5556667777")
       post :create
-      response.should redirect_to(edit_group)
+      assigns[:group].should_not be_nil
+      response.should redirect_to(group_path(assigns[:group].id))
     end
   end
   
@@ -26,7 +28,7 @@ describe GroupsController do
   end
   
   describe "boilerplate functionality" do
-    describe "index"
+    describe "index" do
       it "should set @groups" do
         get :index
         assigns[:groups].should_not be_nil
@@ -37,10 +39,11 @@ describe GroupsController do
     
     describe "show/edit" do
       it "should set @group and a @page_title" do
-      [:show,:edit].each do |meth|
-        get meth, {:id=>@group.id}
-        assigns[:group].should_not be_nil
-        assigns[:page_title].should_not be_nil
+        [:show,:edit].each do |meth|
+          get meth, {:id=>@group.id}
+          assigns[:group].should_not be_nil
+          assigns[:page_title].should_not be_nil
+        end
       end
       pending "should only show if it's the currently logged in user's group" do
       end
@@ -91,9 +94,9 @@ describe GroupsController do
       assigns[:group].students.should be_empty
     end
     
-    it "on success, should redirect to edit page" do
+    it "on success, should redirect to index" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}
-      response.should redirect_to(:edit_group)
+      response.should redirect_to(:groups)
     end
     it "on success, should have no errors" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]}}
@@ -117,7 +120,6 @@ describe GroupsController do
       }.to change(Student,:count).by(1) #as opposed to 2
       
       @group.students.count.should == 2
-      response.should redirect_to(:edit_group)
       assigns[:group].errors.should be_empty
     end
     
@@ -130,13 +132,38 @@ describe GroupsController do
   end
   
   describe "send_message" do
-    pending "should send a message to all group members" do
+    before :each do
+      $outbound_flocky.should_receive(:message).with(@group.phone_number,/test message/,an_instance_of(Array))
     end
-    pending "should send a message delayed-like" do
+    
+    it "should send a message to all group members" do
+      post :send_message, {:id=>@group.id, :message=>{:content=>"test message"}, :commit=>"send now"}
+    end
+    it "should send a message delayed-like" do
+      $outbound_flocky.should_receive(:delay) {$outbound_flocky}
+      post :send_message, {:id=>@group.id, :message=>{:content=>"test message"}, :commit=>"send_scheduled", :date=>{:year=>"1999",:month=>"12",:day=>"31",:hour=>"23"}}
     end
   end
+  
   describe "receive_message" do
-    pending "should send a message to all group members except original sender" do
+    describe "if teacher does have phone number" do
+      before :each do
+        @group.user.phone_number = @teacher_num = "5551234567"
+        @group.user.save
+      end
+      
+      it "if sent from student, should send a message to teacher" do
+        $outbound_flocky.should_receive(:message).with(@group.phone_number,/goat/,[@teacher_num])
+        post :receive_message, {:incoming_number=>@group.phone_number, :origin_number=>@group.students.first.phone_number, :message=>"I was told it was a giant mutant space goat!"}
+      end
+      it "if sent from teacher, should send a message to all group members" do
+        $outbound_flocky.should_receive(:message).with(@group.phone_number,/moth/,@group.students.map(&:phone_number))
+        post :receive_message, {:incoming_number=>@group.phone_number, :origin_number=>@teacher_num, :message=>"I'm sure it was a space moth."}
+      end
+    end
+    describe "if teacher does not have phone number" do
+      pending "if sent from student...it disappears?" do
+      end
     end
   end
   

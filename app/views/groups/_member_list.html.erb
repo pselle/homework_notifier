@@ -9,7 +9,7 @@
     <% end %>
     <li>
       <%= link_to 'New', new_group_student_path(@group), :class => 'button minor' %>
-      <%= link_to 'Edit', edit_memberships_of_group_path, :class => 'button minor secondary' %>
+      <%= link_to 'Edit', edit_group_path(@group), :class => 'button minor secondary' %>
     </li>
   </ul>
 <% end %>

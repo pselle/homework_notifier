@@ -79,7 +79,7 @@ describe GroupsController do
       @group.students.count.should == 2
       @group.students.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist
     end
-    it "should not create a duplicate student, even if we forget to pass an id" do
+    it "should not create a duplicate student in the same group, even if we forget to pass an id" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>@member1.name,:phone_number=>@member1.phone_number}]}}
       Student.find_all_by_phone_number(@member1.phone_number).count.should == 1
       @group.students.count.should == 1

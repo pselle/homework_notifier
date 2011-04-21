@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   #a user can create groups, and add students to those groups
 
   has_many :groups
+  has_many :logged_messages, :as=>:sender, :dependent=>:nullify
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

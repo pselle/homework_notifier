@@ -1,7 +1,15 @@
 require 'spec_helper'
 
 describe GroupsController do
-
+  
+  before(:each) do
+    login
+    @group=Factory.create(:group,:user=>controller.current_user)
+    @member1 = Factory.create(:student)
+    @group.students << @member1
+    controller.stub(:get_new_phone_number).and_return("4443332222")
+  end
+  
   describe "authorization" do
     pending "all actions should be accessible to logged in users" do
     end
@@ -26,13 +34,7 @@ describe GroupsController do
       assigns[:group].user.should == controller.current_user
     end
   end
-  
-  before(:each) do
-    login
-    @group=Factory.create(:group,:user=>controller.current_user)
-    @member1 = Factory.create(:student)
-    @group.students << @member1
-  end
+
   
   describe "boilerplate functionality" do
     describe "index" do
@@ -156,9 +158,24 @@ describe GroupsController do
       $outbound_flocky.should_receive(:delay) {$outbound_flocky}
       post :send_message, {:id=>@group.id, :message=>{:content=>"test message"}, :commit=>"send_scheduled", :date=>{:year=>"1999",:month=>"12",:day=>"31",:hour=>"23"}}
     end
+    
+    it "should log the message" do
+      expect {
+        post :send_message, {:id=>@group.id, :message=>{:content=>"test message"}, :commit=>"send now"}
+      }.to change(LoggedMessage,:count).by(@group.students.count)
+      LoggedMessage.last.message.should match("test message")
+    end
   end
   
   describe "receive_message" do
+    it "should log the message" do
+      $outbound_flocky.should_receive(:message).with(@group.phone_number,/test message/,an_instance_of(Array))
+      expect {
+        post :send_message, {:id=>@group.id, :message=>{:content=>"test message"}, :commit=>"send now"}
+      }.to change(LoggedMessage,:count).by(@group.students.count)
+      LoggedMessage.last.message.should match("test message")
+    end
+    
     describe "if teacher does have phone number" do
       before :each do
         @group.user.phone_number = @teacher_num = "5551234567"

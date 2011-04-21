@@ -98,7 +98,11 @@ class GroupsController < ApplicationController
     #TODO: ensure group found
     numbers = @group.students.map(&:phone_number)
     numbers << @group.user.phone_number if @group.user.phone_number
-
+    
+    numbers.each do |destination|
+      LoggedMessage.create(:group=>@group,:sender=>current_user,:destination_phone=>destination,:message=>message)
+    end
+      
     if params[:commit].match /scheduled/i
       time_zone = ActiveSupport::TimeZone["Eastern Time (US & Canada)"]  #use eastern time for the input
       
@@ -130,6 +134,10 @@ class GroupsController < ApplicationController
       
         numbers << @group.user.phone_number if @group.user.phone_number unless sent_by_admin
         response = $outbound_flocky.message @group.phone_number, message, numbers
+        
+        numbers.each do |destination|
+          LoggedMessage.create(:group=>@group,:sender=>(sent_by_admin ? current_user : @sending_student),:source_phone=>params[:incoming_number],:destination_phone=>destination,:message=>message)
+        end
       end
     end
     

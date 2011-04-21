@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
   attr_readonly :user_id #after being set, can't change
   
   has_many :students, :dependent=>:destroy
+  has_many :logged_messages, :dependent=>:nullify
   
   accepts_nested_attributes_for :students, :allow_destroy=>true, :reject_if=>:all_blank
   

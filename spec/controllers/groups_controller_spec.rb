@@ -14,15 +14,22 @@ describe GroupsController do
     end
     it "after successful create, should redirect to the show page" do
       controller.should_receive(:get_new_phone_number).and_return("5556667777")
-      post :create
+      post :create, :group=>{}
       assigns[:group].should_not be_nil
       response.should redirect_to(assigns[:group])
+    end
+    
+    it "must belong to the logged in user" do
+      post :create, :group=>{}
+      assigns[:group].user.should == controller.current_user
+      post :create, :group=>{:user_id=>999}
+      assigns[:group].user.should == controller.current_user
     end
   end
   
   before(:each) do
     login
-    @group=Factory.create(:group)
+    @group=Factory.create(:group,:user=>controller.current_user)
     @member1 = Factory.create(:student)
     @group.students << @member1
   end
@@ -69,6 +76,12 @@ describe GroupsController do
   
   
   describe "#update" do
+    it "can't change the user" do
+      expect {
+        put :update, {:id=>@group.id, :group=>{:user_id=>999}}
+        @group.reload
+      }.to_not change(@group,:user)
+    end
     it "should create students based on passed in parameters" do
       put :update, {:id=>@group.id, :group=>{:students_attributes=>[{:name=>"Imma new guy",:phone_number=>"555-123-4567"}]} }
       Student.find_by_name("Imma new guy").should_not be_nil #'should exist' doesn't seem to exist

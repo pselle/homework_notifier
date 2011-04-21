@@ -13,7 +13,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     @page_title = @group.title
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class GroupsController < ApplicationController
   end
 
   def new
-    @group = Group.new
+    @group = current_user.groups.new
     @page_title = "New Group"
     @students=[Student.new]*10
     
@@ -34,13 +34,14 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     @page_title = "#{@group.title}"
     @students = @group.students
   end
 
   def create
-    @group = Group.new(params[:group])
+    params[:group][:user_id]=current_user.id
+    @group = current_user.groups.new(params[:group])
     @group.phone_number = get_new_phone_number
     @page_title = "New Groups"
 		
@@ -64,7 +65,7 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     @page_title = "#{@group.title}"
     
     respond_to do |format|
@@ -80,7 +81,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     @group.destroy
 
     respond_to do |format|
@@ -92,7 +93,7 @@ class GroupsController < ApplicationController
 
   #POST groups/:id/send_message, sends a message to all members of group
   def send_message
-    @group = Group.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     message = @group.user.display_name+": "+params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
     numbers = @group.students.map(&:phone_number)
@@ -118,7 +119,7 @@ class GroupsController < ApplicationController
   def receive_message
     params[:incoming_number] = $1 if params[:incoming_number]=~/^1(\d{10})$/
     params[:origin_number] = $1 if params[:origin_number]=~/^1(\d{10})$/
-    @group=Group.find_by_phone_number(params[:incoming_number])
+    @group=current_user.groups.find_by_phone_number(params[:incoming_number])
     
     if @group
       sent_by_admin=@group.user.phone_number==params[:origin_number]
@@ -137,7 +138,7 @@ class GroupsController < ApplicationController
   end
   
   def load_groups
-    @groups = Group.all
+    @groups = current_user.groups.all
   end
 
   private

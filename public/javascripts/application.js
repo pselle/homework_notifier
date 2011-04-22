@@ -3,3 +3,10 @@ jQuery(function(){
     $(this).append('Loading...');
   })
 })
+
+$(document).ready(function() {
+	$("#edit_group_cancel").click(function() { 
+		$('#edit_group').hide(); 
+		$('#group_info').show();
+	});
+});

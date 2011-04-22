@@ -4,7 +4,7 @@
     	<% if (params[:controller] == 'groups') && (params[:action] == 'new' || params[:action] == 'create') %>
     		> New Group
     	<% elsif (params[:controller] == 'groups') && (params[:action] == 'edit' || params[:action] == 'update' || params[:action] == 'show' || params[:action] == 'edit_memberships') %>
-    		> <%= link_to "#{@group.title}", group_url(@group), :class => 'white' %>
+    		> <%= link_to "#{@group.title}", group_url(@group), :class => 'white', :id => "group_name" %>
     		<% if params[:action] == 'edit' %>
     			> Edit Group
     		<% elsif params[:action] == 'edit_memberships' %>

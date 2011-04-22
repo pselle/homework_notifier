@@ -101,6 +101,9 @@ input.last { margin-bottom: 5px; }
 label { color: dimGray; }
 input.first{ margin-top: 30px; }
 input.membership_field { width: 315px;}
+input.ajax_edit{
+	font-size: 0.6em !important;
+}
 .formwrap {
 	border: 8px solid #d3d3d3;
 	border-radius: 4px;

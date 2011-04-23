@@ -24,7 +24,7 @@ a:hover { color: #3a8bd6; text-decoration: underline; }
 a:visited { color: #3a8bd6; }
 a:active { color: #3a8bd6; }
 
-a.button, input.button, input[type=submit] {
+a.button, input.button {
 	background-color: #3a8bd6;
 	border-radius: 3px;
 	color: white;
@@ -40,11 +40,11 @@ a.button, input.button, input[type=submit] {
 	font-size: 15px;
 	font-weight: normal;
 }
-a.button:hover, input:hover.button, input[type=submit]:hover {
+a.button:hover, input:hover.button {
 	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #6bb0f0));
 }
-a.button:active, input:active.button, input[type=submit]:active {
+a.button:active, input:active.button {
 	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a8bd6), color-stop(1, #1969b3));
 }

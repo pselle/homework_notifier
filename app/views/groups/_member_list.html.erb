@@ -1,6 +1,7 @@
 <% if @group.students.blank? %>
 	<h5>There are no members in this group.</h5>
 	<%= link_to 'New Member', new_group_student_path(@group), :class => 'button left minor' %>
+
 <% else %>
 	<h5>Your message will be sent to <%= pluralize @group.students.count, "member" %>:</h5>
 	<ul id="student_list">
@@ -8,8 +9,7 @@
     	<li><span id="student_info_<%=member.id%>" onClick="$(this).hide(); $('#edit_student_<%=member.id%>').show();"><%= member.name %> </span><%= link_to 'X', group_path(@group, :group=>{:students_attributes=>[{:id=>member.id,:_destroy=>1}]}), :confirm => 'Are you sure?', :method => :put, :class => 'button minor secondary' %><span id="edit_student_info_<%=member.id%>"><%=render :partial => "ajax_membership_form", :locals => {:student => member, :group => @group}%></span></li>
     <% end %>
     <li>
-      <%= link_to 'New', new_group_student_path(@group), :class => 'button minor' %>
-      <%= link_to 'Edit', edit_group_path(@group), :class => 'button minor secondary' %>
+      <%= link_to 'Add', new_group_student_path(@group), :class => 'button minor right' %>
     </li>
   </ul>
 <% end %>

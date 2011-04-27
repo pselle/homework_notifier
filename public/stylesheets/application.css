@@ -64,7 +64,7 @@ a.button.secondary:active, input:active.button.secondary {
 	background: -moz-linear-gradient(center bottom, #969696 0%, #676767 100%);
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #969696), color-stop(1, #676767));
 }
-a.button.minor {
+a.button.minor, input.button.minor {
 	font-size: 12px;
 	padding: 4px 13px 5px 13px;
 }
@@ -93,7 +93,7 @@ table { width: 100%; }
 table.padded { margin-left: 10px; }
 td.top{ vertical-align: top; }
 input[type="password"], input[type="email"], input[type="text"]{
-	font-size: 1.1em !important;
+	font-size: 1.1em;
 	padding: 7px;
 	margin-bottom: 20px;
 }
@@ -102,7 +102,20 @@ label { color: dimGray; }
 input.first{ margin-top: 30px; }
 input.membership_field { width: 315px;}
 input.ajax_edit{
-	font-size: 0.6em !important;
+	font-family: 'Josefin Sans', arial, serif;
+	font-weight: bold;
+	background-color: #FFFFD3;
+	border: 1px solid #CCC;
+	width: 80%;
+	padding: 4px;
+}
+input.ajax_edit.title{
+	font-size: 25px;
+	margin-bottom: 4px;
+}
+input.ajax_edit.description{
+	font-size: 0.8em;
+	margin-bottom: 5px;
 }
 .formwrap {
 	border: 8px solid #d3d3d3;
@@ -407,13 +420,20 @@ input.ajax_edit{
 	color: black;
 	font-size: 1.4em;
 }
-.group_info {
-	color: dimGray;
+#group_info {
+	width: 60%;
+	float: left;
+	margin-bottom: 30px;
 }
-.group_number {
-	color: black;
-	font-size: 1.4em;
-	
+#group_number {
+	float: right;
+	width: 39%;
+	clear: right;
+}
+#edit_group {
+	width: 60%;
+	float: left;
+	margin-bottom: 30px;
 }
 .group_members_count {
 	color: dimGray;
@@ -471,7 +491,7 @@ input.ajax_edit{
   float: right;
 }
 #footer {
-	position: absolute;
+	position: relative;
 	width: 940px;
 	height: 25px;
 	margin-left: -470px;

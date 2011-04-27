@@ -22,13 +22,25 @@
 </script>
 
 <%= render :partial => 'ajax_form' %>
+<div>
+    <div id="group_info" onClick="$(this).hide(); $('#edit_group').show();">
+        <h3>
+            <span class='title'><%= @group.title %></span>
+        </h3>
+        <h5>
+            <span class="left"><h5><%= @group.description %></span>
+        </h5>
+    </div>
+    <div id="group_number">
+        <h3 class="right">
+            <%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %>
+        </h3>
+    </div
+</div>
 
-<h4 id="group_info" onClick="$(this).hide(); $('#edit_group').show();"><span class="left"><%= @group.description %></span>
-<span class="right"><%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %></span></h4>
-<br><br>
 <%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
   <%= fields_for :message do |mf| %>
-    <div class="field">
+    <div class="field left">
       <%= mf.label :content, "Send Message" %>
 			<br />
       <span class="formwrap"><%= mf.text_area :content, :id => "message_content"%>

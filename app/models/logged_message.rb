@@ -8,4 +8,8 @@ class LoggedMessage < ActiveRecord::Base
   validates_presence_of :message
   
   attr_readonly :source_phone, :destination_phone, :message #can't edit after the fact
+  
+  def self.unique_messages
+    group("message")
+  end
 end

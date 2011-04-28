@@ -15,6 +15,7 @@ class GroupsController < ApplicationController
   def show
     @group = current_user.groups.find(params[:id])
     @page_title = @group.title
+    @messages = @group.logged_messages.unique_messages.order("created_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb

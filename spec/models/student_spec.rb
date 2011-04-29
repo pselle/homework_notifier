@@ -15,9 +15,13 @@ describe Student do
     it "should automatically be converted to the canonical format, agnostic of valid-ish input" do
       Factory.create(:student, :phone_number=>"(555) 123-4567").phone_number.should == "5551234567"
     end
-    it "must be unique" do
-      Factory.build(:student,:phone_number=>@student.phone_number).should_not be_valid
+    it "may not be unique, across different groups" do
+      Factory.build(:student,:phone_number=>@student.phone_number,:group_id=>3).should be_valid
     end
+    it "must be unique in a group" do
+      Factory.build(:student,:phone_number=>@student.phone_number,:group_id=>@student.group_id).should_not be_valid
+    end
+    
   end
   describe "their name" do
     it "must be present" do

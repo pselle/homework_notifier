@@ -1,6 +1,13 @@
-<div id="right_column">
-	<%= render :partial => 'member_list' %>
-</div>
 <div id="left_column">
 	<%= render :partial => 'send_message' %>
 </div>
+<div id="right_column">
+	<%= render :partial => 'member_list' %>
+</div>
+<h3>All Messages</h3>
+<table id="messages">
+	<tr><th>Sent On</th><th>Message</th></tr>
+	<% @messages.each do |message| %>
+		<tr><td><%=  message.created_at %></td><td><%= message.message %></td></tr>
+	<%end%>
+</table>

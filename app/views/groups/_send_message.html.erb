@@ -5,12 +5,12 @@
 		{
 		var box=$(this).val();
 		var main = box.length *100;
-		var value= (main / <%= 160 - current_user.display_name.length %>);
+		var value= (main / <%= 158 - current_user.display_name.length %>);
 		var count= box.length;
 
-		if(box.length <= <%= 160 - current_user.display_name.length %>)
+		if(box.length <= <%= 158 - current_user.display_name.length %>)
 		{
-			$('#count').html(count + ' / ' + <%= 160 - current_user.display_name.length %>);
+			$('#count').html(count + ' / ' + <%= 158 - current_user.display_name.length %>);
 			$('#bar').animate(
 				{
 				"width": value+'%',
@@ -50,7 +50,7 @@
 				<div id="bar"></div>
 			</div>
 		</div>
-		<div id="count">0 / <%= 160 - current_user.display_name.length %></div>
+		<div id="count">0 / <%= 158 - current_user.display_name.length %></div>
 	</h5></div>
 	</span>
     </div>

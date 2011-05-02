@@ -275,13 +275,17 @@ span:hover.text_highlight {
 	padding: 0px 10px 5px 10px;
 }
 #logo {
-	width: 185px;
+	width: 166px;
 	height: 50px;
 	margin: 0 0px 10px 0;
-	padding-left: 15px;
+	padding-left: 34px;
 	float: left;
 	border-bottom: 1px solid gray;
 	border-radius: 0px 0px 0px 8px;
+	background-image: url('/images/phone.png');
+	background-repeat: no-repeat;
+	background-position: 12px;
+	background-color: #696969;
 }
 #nav {
 	width: 720px;
@@ -295,7 +299,7 @@ span:hover.text_highlight {
 .top_bar {
 	/* fallback */
 	  background-color: #696969;
-
+/*
 	  /* Firefox 3.6+ */
 	  background: -moz-linear-gradient(100% 100% 90deg, #696969, #727272);
 
@@ -304,7 +308,7 @@ span:hover.text_highlight {
 	  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#696969), to(#727272));
 
 	  /* Safari 5.1+, Chrome 10+ */
-	  background: -webkit-linear-gradient(#696969, #727272);	
+	  background: -webkit-linear-gradient(#696969, #727272);*/	
 }
 #welcome_user {
 	font-size: 14px;

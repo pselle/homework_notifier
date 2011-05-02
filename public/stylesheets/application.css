@@ -25,15 +25,12 @@ a:visited { color: #3a8bd6; }
 a:active { color: #3a8bd6; }
 
 a.button, input.button {
-	background-color: #3a8bd6;
+	background-color: #2ea390;
 	border-radius: 3px;
 	color: white;
 	font-size: 15px;
 	padding: 6px 13px 7px 13px;
-	background: -moz-linear-gradient(center bottom, #1969b3 0%, #3a8bd6 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #3a8bd6));
-	text-shadow: 0px -1px 0px #132943;
-	border: 1px solid #5F5F5F;
+	border: 2px solid #2ea390;
 	text-decoration: none;
 	cursor: pointer;
 	font-family: Oswald, arial, serif;
@@ -41,28 +38,17 @@ a.button, input.button {
 	font-weight: normal;
 }
 a.button:hover, input:hover.button {
-	background: -moz-linear-gradient(center bottom, #1969b3 0%, #6bb0f0 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #1969b3), color-stop(1, #6bb0f0));
-}
-a.button:active, input:active.button {
-	background: -moz-linear-gradient(center bottom, #3a8bd6 0%, #1969b3 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a8bd6), color-stop(1, #1969b3));
+	background-color: white;
+	color: #2ea390;
 }
 a.button.secondary, input.button.secondary {
-	background-color: #e5e5e5;
-	color: #555555;
-	background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f7f7f7 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dfdfdf), color-stop(1, #f7f7f7));
-	text-shadow: 0px -1px 0px #e2e2e2;
-	border: 1px solid #5F5F5F;
+	background-color: #c4c4c4;
+	color: white;
+	border: 2px solid #c4c4c4;
 }
 a.button.secondary:hover, input:hover.button.secondary {
-	background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dfdfdf), color-stop(1, #ffffff));
-}
-a.button.secondary:active, input:active.button.secondary {
-	background: -moz-linear-gradient(center bottom, #fbfbfb 0%, #dfdfdf 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #fbfbfb), color-stop(1, #dfdfdf));
+	background-color: white;
+	color: #c4c4c4;
 }
 a.button.minor, input.button.minor {
 	font-size: 12px;

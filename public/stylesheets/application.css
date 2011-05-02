@@ -389,7 +389,7 @@ span:hover.text_highlight {
 	text-transform: lowercase;
 }*/
 #main {
-  margin: 2px 10px 12px 0px;
+  margin: 2px 10px 0px 0px;
   background-color: #fff;
   float: left;
   width: 940px;
@@ -549,17 +549,19 @@ span:hover.text_highlight {
 #footer {
 	position: relative;
 	width: 940px;
-	height: 35px;
+	height: 20px;
 	margin-left: -470px;
 	margin-bottom: 10px;
 	left: 50%;
 	text-align: center;
-	line-height: 35px;
+	line-height: 20px;
 	font-size: 10px;
-	background-color: #696969;
+	background-color: #808080;
 	color: #cccccc;
 	font-family: 'Helvetica';
 	clear: both;
+	border-top: 1px solid #b3b3b3;
+	border-radius: 0px 0px 8px 8px;
 }
 #footer a {
 	text-decoration: none;

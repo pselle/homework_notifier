@@ -27,10 +27,11 @@
         <table id="messages">
         	<tr><th>Sent On</th><th>Message</th></tr>
         	<% @messages.each do |message| %>
-        		<tr><td><%=  message.created_at %></td><td><%= message.message %></td></tr>
+        		<tr><td><%=formatted_time(message.created_at) %></td><td><%= message.message %></td></tr>
         	<%end%>
         </table>
         <div id="return_to_groups"></div>
         <span><%= link_to "< All Groups", groups_path %></span>
+        <div id="return_to_groups"></div>
     </div>
 </div>

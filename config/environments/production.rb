@@ -49,4 +49,6 @@ HomeworkNotifier::Application.configure do
   
   config.action_mailer.default_url_options = { :host => 'homeworknotifier.heroku.com' }
   
+  config.time_zone = "Eastern Time (US & Canada)"
+  
 end

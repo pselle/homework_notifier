@@ -24,7 +24,7 @@ a:hover { color: #3a8bd6; text-decoration: underline; }
 a:visited { color: #3a8bd6; }
 a:active { color: #3a8bd6; }
 
-a.button, input.button {
+a.button, input.button, button {
 	background-color: #2ea390;
 	border-radius: 3px;
 	color: white;
@@ -244,14 +244,18 @@ span:hover.text_highlight {
 	padding: 4px;
 }
 #logo {
-	line-height: 37px;
+	line-height: 47px;
 	letter-spacing: 1.5px;
 	text-align: center;      
 }
 
 #logo_text {
-  position: relative;
-  top: 7px;
+	position: relative;
+	top: 7px;
+	color: white;
+	text-shadow: 1px 1px 3px #3d3d3d;
+	font-size: 2em;
+	text-decoration: none;
 }
 
 #logo #top {
@@ -261,50 +265,76 @@ span:hover.text_highlight {
 #logo #bottom {
   font-size: 50px;
 }
-#logo_text a{
+#logo_text div:hover;{
 	text-decoration: none;
 }
 #container {
 	width: 940px;
 	overflow: auto;
 	margin: 0px auto 0px auto;
-	padding: 15px 10px 5px 10px;
+	padding: 0px 10px 5px 10px;
 }
 #logo {
-	width: 170px;
-	height: 75px;
-	margin: 0 10px 10px 0;
-	background-color: #fff;
+	width: 185px;
+	height: 50px;
+	margin: 0 0px 10px 0;
+	padding-left: 15px;
 	float: left;
+	border-bottom: 1px solid gray;
+	border-radius: 0px 0px 0px 8px;
 }
 #nav {
-  width: 750px;
-  height: 75px; /*should be 75*/
-  background-color: #FFF;
-  margin: 0 0 10px 10px;
-  float: left;
+	width: 720px;
+	height: 50px; /*should be 75*/
+	margin: 0 0 10px 0px;
+	float: left;
+	border-bottom: 1px solid gray;
+	padding-right: 20px;
+	border-radius: 0px 0px 8px 0px;
+}
+.top_bar {
+	/* fallback */
+	  background-color: #696969;
+
+	  /* Firefox 3.6+ */
+	  background: -moz-linear-gradient(100% 100% 90deg, #696969, #727272);
+
+	  /* Safari 4-5, Chrome 1-9 */
+	  /* -webkit-gradient(<type>, <point> [, <radius>]?, <point> [, <radius>]? [, <stop>]*) */
+	  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#696969), to(#727272));
+
+	  /* Safari 5.1+, Chrome 10+ */
+	  background: -webkit-linear-gradient(#696969, #727272);	
+}
+#welcome_user {
+	font-size: 14px;
+	float: right;
+	clear: both;
+	margin: 2px 0px -26px 0px;
+	color: #dddddd;
 }
 #main_menu{
     padding: 0px;
     margin: 0px;
+	clear: both;
 }
 #main_menu li{
     list-style: none;
-    float: left;
-    margin-right: 1.3em;
-    font-size: 22px;
+    float: right;
+    margin-left: 30px;
+    font-size: 20px;
     font-weight: bold;
-    line-height: 80px;
+    line-height: 67px;
 }
 #main_menu li a:hover {
     text-decoration: underline;
 }
 #main_menu li a{
 	text-decoration: none;
-    color: #5A5A5A;
+    color: white;
 	text-transform: uppercase;
 }
-#main_menu li:first-child{
+/*#main_menu li:first-child{
     margin-left: 1.3em;
 }
 #main_menu li:last-child{
@@ -321,8 +351,8 @@ span:hover.text_highlight {
 }
 #main_menu li:last-child a:hover{
 	text-decoration: underline;
-}
-#sign_in{
+}*/
+/*#sign_in{
 	margin-top: 0px;
 	margin-right: 0px !important;
 }
@@ -332,13 +362,13 @@ span:hover.text_highlight {
     border-bottom-left-radius: 7px;
     border-top-left-radius: 7px;
     padding: 9px 6px 2px 8px;
-    color: #fff;
+    color: white;
 	line-height: 22px !important;
     text-decoration: none;
 	text-transform: capitalize;
 	cursor: default;
-}
-#account_menu li{
+}*/
+/*#account_menu li{
     list-style: none;
     float: right;
 	clear: left;
@@ -353,13 +383,14 @@ span:hover.text_highlight {
 	text-decoration: none;
     color: #5A5A5A;
 	text-transform: lowercase;
-}
+}*/
 #main {
-  margin: 10px 10px 0px 0px;
+  margin: 2px 10px 12px 0px;
   background-color: #fff;
   float: left;
   width: 940px;
   min-height: 610px;
+	border-radius: 8px 8px 0px 0px;
 }
 .header{
   width: 920px;
@@ -368,6 +399,7 @@ span:hover.text_highlight {
 #main .header{
   background-color: #FAA644;
   padding: 10px;
+	border-radius: 8px 8px 0px 0px;
 }
 #sidebar .header{
   background-color: #19A391
@@ -513,16 +545,19 @@ span:hover.text_highlight {
 #footer {
 	position: relative;
 	width: 940px;
-	height: 25px;
+	height: 35px;
 	margin-left: -470px;
+	margin-bottom: 10px;
 	left: 50%;
 	text-align: center;
+	line-height: 35px;
 	font-size: 10px;
-	color: #8f8f8f;
+	background-color: #696969;
+	color: #cccccc;
 	font-family: 'Helvetica';
 	clear: both;
 }
 #footer a {
 	text-decoration: none;
-	color: #5a5a5a;
+	color: white;
 }

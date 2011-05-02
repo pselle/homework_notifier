@@ -49,26 +49,28 @@ a.button:active, input:active.button {
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3a8bd6), color-stop(1, #1969b3));
 }
 a.button.secondary, input.button.secondary {
-	background-color: #676767;
-	color: white;
-	background: -moz-linear-gradient(center bottom, #676767 0%, #969696 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #676767), color-stop(1, #969696));
-	text-shadow: 0px -1px 0px #132943;
+	background-color: #e5e5e5;
+	color: #555555;
+	background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #f7f7f7 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dfdfdf), color-stop(1, #f7f7f7));
+	text-shadow: 0px -1px 0px #e2e2e2;
 	border: 1px solid #5F5F5F;
 }
 a.button.secondary:hover, input:hover.button.secondary {
-	background: -moz-linear-gradient(center bottom, #676767 0%, #aaaaaa 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #676767), color-stop(1, #aaaaaa));
+	background: -moz-linear-gradient(center bottom, #dfdfdf 0%, #ffffff 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #dfdfdf), color-stop(1, #ffffff));
 }
 a.button.secondary:active, input:active.button.secondary {
-	background: -moz-linear-gradient(center bottom, #969696 0%, #676767 100%);
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #969696), color-stop(1, #676767));
+	background: -moz-linear-gradient(center bottom, #fbfbfb 0%, #dfdfdf 100%);
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #fbfbfb), color-stop(1, #dfdfdf));
 }
 a.button.minor, input.button.minor {
 	font-size: 12px;
 	padding: 4px 13px 5px 13px;
 }
-
+a.button.minor.margin_top, input.button.minor.margin_top {
+	margin-top: 15px;
+}
 textarea {
 	resize: none;
 	border: 1px solid #aaaaaa;
@@ -107,15 +109,31 @@ input.ajax_edit{
 	background-color: #FFFFD3;
 	border: 1px solid #CCC;
 	width: 80%;
-	padding: 4px;
 }
 input.ajax_edit.title{
 	font-size: 25px;
 	margin-bottom: 5px;
+	padding: 4px;
 }
 input.ajax_edit.description{
 	font-size: 0.8em;
 	margin-bottom: 5px;
+	padding: 4px;
+}
+input.ajax_edit.student{
+	font-size: 1em;
+	margin-bottom: 5px;
+	padding: 6px 0px 0px 2px;
+}
+input.ajax_edit.number{
+	font-size: 1em;
+	margin-bottom: 2px;
+	font-weight: normal;
+	padding: 6px 0px 0px 2px;
+}
+span:hover.text_highlight {
+	cursor: text;
+	background-color: #FFFFD3;
 }
 .formwrap {
 	border: 8px solid #d3d3d3;
@@ -172,9 +190,20 @@ input.ajax_edit.description{
 	list-style: none;
 	padding: 10px 0px 5px 15px;
 }
-#student_list li:last-child{
-	margin-top: 10px;
-	text-align: left;
+#student_list li:odd{
+	background-color: red;
+}
+#student_name {
+	margin-bottom: -10px;
+	font-weight: bold;
+	padding-top: 5px;
+}
+#student_number {
+	margin-top: 0px;
+	font-weight: normal;
+}
+#remove_member {
+	font-size: .8em;
 }
 .flash {
 	margin: 10px;
@@ -416,9 +445,13 @@ input.ajax_edit.description{
 	text-decoration: none;
 	background-color: black;
 }
-.group_title {
+.groups.primary {
 	color: black;
 	font-size: 1.4em;
+}
+.groups.secondary {
+	color: dimGray;
+	font-size: 1.0em;
 }
 #group_info {
 	width: 60%;
@@ -434,6 +467,7 @@ input.ajax_edit.description{
 	width: 60%;
 	float: left;
 	margin-bottom: 30px;
+	overflow: auto;
 }
 .group_members_count {
 	color: dimGray;
@@ -449,7 +483,7 @@ input.ajax_edit.description{
 .noclick {
     cursor: default;
 }
-#return_to_groups { height: 90px; clear: both; }
+#return_to_groups { height: 50px; clear: both; }
 .content{
 	padding: 15px 20px 20px 20px;
 	position: relative;

@@ -1,13 +1,36 @@
 <div id="right_column">
-	<%= render :partial => 'member_list' %>
+    <% if @group.students.blank? %>
+    	<h5>There are no members in this group.</h5>
+    	<%= link_to 'Add Member', new_group_student_path(@group), :class => 'button left minor margin_top' %>
+
+    <% else %>
+    	<h5>Your message will be sent to <%= pluralize @group.students.count, "member" %>:</h5>
+    	<ul id="student_list">
+        <% for member in @group.students %>
+        	<li>
+        	    <%= render :partial => 'member_list' , :locals => {:member => member}%>
+        	</li>
+        <% end %>
+        <li>
+          <%= link_to 'Add Member', new_group_student_path(@group), :class => 'button minor left margin_top' %>
+        </li>
+      </ul>
+    <% end %>
 </div>
 <div id="left_column">
-	<%= render :partial => 'send_message' %>
+	<div>
+	    <%= render :partial => 'send_message' %>
+	</div>
+	<div id="return_to_groups"></div>
+	<div class="left margin_top">
+        <h3>Sent Messages</h3>
+        <table id="messages">
+        	<tr><th>Sent On</th><th>Message</th></tr>
+        	<% @messages.each do |message| %>
+        		<tr><td><%=  message.created_at %></td><td><%= message.message %></td></tr>
+        	<%end%>
+        </table>
+        <div id="return_to_groups"></div>
+        <span><%= link_to "< All Groups", groups_path %></span>
+    </div>
 </div>
-<h3>All Messages</h3>
-<table id="messages">
-	<tr><th>Sent On</th><th>Message</th></tr>
-	<% @messages.each do |message| %>
-		<tr><td><%=  message.created_at %></td><td><%= message.message %></td></tr>
-	<%end%>
-</table>

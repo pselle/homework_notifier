@@ -1,15 +1,12 @@
-<% if @group.students.blank? %>
-	<h5>There are no members in this group.</h5>
-	<%= link_to 'New Member', new_group_student_path(@group), :class => 'button left minor' %>
-
-<% else %>
-	<h5>Your message will be sent to <%= pluralize @group.students.count, "member" %>:</h5>
-	<ul id="student_list">
-    <% for member in @group.students %>
-    	<li><span id="student_info_<%=member.id%>" onClick="$(this).hide(); $('#edit_student_<%=member.id%>').show();"><%= member.name %> </span><%= link_to 'X', group_path(@group, :group=>{:students_attributes=>[{:id=>member.id,:_destroy=>1}]}), :confirm => 'Are you sure?', :method => :put, :class => 'button minor secondary' %><span id="edit_student_info_<%=member.id%>"><%=render :partial => "ajax_membership_form", :locals => {:student => member, :group => @group}%></span></li>
-    <% end %>
-    <li>
-      <%= link_to 'Add', new_group_student_path(@group), :class => 'button minor right' %>
-    </li>
-  </ul>
-<% end %>
+<span id="student_info_<%= member.id %>" onClick="$(this).hide(); $('#edit_student_<%= member.id %>').show();">
+    <div id="student_name">
+        <span class="text_highlight"><%= member.name %></span>
+        <%= link_to 'remove', group_path(@group, :group=>{:students_attributes=>[{:id=>member.id,:_destroy=>1}]}), :confirm => 'Are you sure?', :method => :put, :id => 'remove_member' %>
+    </div>
+    <div id="student_number">
+        <span class="text_highlight"><%= PhoneValidator::OUTPUT_PRINTF%member.phone_number.scan(/\d/) %></span>
+    </div>
+</span>
+<span id="edit_student_info_<%=member.id%>">
+    <%=render :partial => "groups/ajax_membership_form", :locals => {:student => member, :group => @group}%>
+</span>

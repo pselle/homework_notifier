@@ -4,12 +4,12 @@
 			<% @groups.each do |group| %>
 				<a class="group_list_item" href="<%= group_path(group) %>">
 							<span class="left">
-								<span class="group_title"><%= group.title %></span><br>
-								<span class="group_info"><%= group.description %></span>
+								<span class="groups primary"><%= group.title %></span><br>
+								<span class="groups secondary"><%= group.description %></span>
 							</span>
 							<span class="right">
-								<span class="group_number"><%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %></span><br>
-								<span class="group_members_count"><%= pluralize group.students.count, "member" %></span>
+								<span class="groups primary"><%= PhoneValidator::OUTPUT_PRINTF%group.phone_number.scan(/\d/) %></span><br>
+								<span class="groups secondary right"><%= pluralize group.students.count, "member" %></span>
 							</span>
 				</a>
 			<% end %>

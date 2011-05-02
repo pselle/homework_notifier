@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
   # GET /students.xml
   def index
     @students = @group.students
+    @student_update = "Now is the time."
 
     respond_to do |format|
       format.html # index.html.erb

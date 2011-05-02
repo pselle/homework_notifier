@@ -1,8 +1,8 @@
-<%= form_for student, :html => {:id => 'edit_student_'+student.id.to_s, :style =>'display: none;'}, :remote => true do |f| %>
+<%= form_for student, :html => {:method => :put, :id => 'edit_student_'+student.id.to_s, :style =>'display: none;'}, :remote => true do |f| %>
     <%= f.hidden_field :group_id, :value => group.id %>
-      <%= f.text_field :name, :class => "ajax_edit" %>
-      <%= f.text_field :phone_number, :class => "ajax_edit" %>
+      <%= f.text_field :name, :class => "ajax_edit student" %>
+      <%= f.text_field :phone_number, :class => "ajax_edit number" %>
   
       <%= f.submit 'Save', :class=>"button minor"%>
-      <a href="#" id="edit_student_cancel" data="<%= student.id%>" class="button minor">Cancel</a>
+      <a href="#" id="edit_student_cancel" data="<%= student.id%>" class="button minor secondary">Cancel</a>
 <%end%>

@@ -25,10 +25,10 @@
 <div>
     <div id="group_info" onClick="$(this).hide(); $('#edit_group').show();">
         <h3>
-            <span class='title'><%= @group.title %></span>
+            <span class='title text_highlight'><%= @group.title %></span>
         </h3>
         <h5>
-            <span class="left"><h5><%= @group.description %></span>
+            <span class="left text_highlight"><h5><%= @group.description %></span>
         </h5>
     </div>
     <div id="group_number">
@@ -65,5 +65,3 @@
     </div>
   </div>
 <%end%>
-<div id="return_to_groups"></div>
-<span><%= link_to "< All Groups", groups_path %></span>

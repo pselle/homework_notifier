@@ -5,12 +5,12 @@
 		{
 		var box=$(this).val();
 		var main = box.length *100;
-		var value= (main / <%= 160 - current_user.display_name.length %>);
+		var value= (main / <%= 158 - current_user.display_name.length %>);
 		var count= box.length;
 
-		if(box.length <= <%= 160 - current_user.display_name.length %>)
+		if(box.length <= <%= 158 - current_user.display_name.length %>)
 		{
-			$('#count').html(count + ' / ' + <%= 160 - current_user.display_name.length %>);
+			$('#count').html(count + ' / ' + <%= 158 - current_user.display_name.length %>);
 			$('#bar').animate(
 				{
 				"width": value+'%',
@@ -21,12 +21,26 @@
 	});
 </script>
 
-<h4><span class="left"><%= @group.description %></span>
-<span class="right"><%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %></span></h4>
-<br><br>
+<%= render :partial => 'ajax_form' %>
+<div>
+    <div id="group_info" onClick="$(this).hide(); $('#edit_group').show();">
+        <h3>
+            <span class='title text_highlight'><%= @group.title %></span>
+        </h3>
+        <h5>
+            <span class="left text_highlight"><h5><%= @group.description %></span>
+        </h5>
+    </div>
+    <div id="group_number">
+        <h3 class="right">
+            <%= PhoneValidator::OUTPUT_PRINTF%@group.phone_number.scan(/\d/) %>
+        </h3>
+    </div
+</div>
+
 <%= form_for @group, :url=>send_message_to_group_path, :html=>{:method=>"post"} do |f| %>
   <%= fields_for :message do |mf| %>
-    <div class="field">
+    <div class="field left">
       <%= mf.label :content, "Send Message" %>
 			<br />
       <span class="formwrap"><%= mf.text_area :content, :id => "message_content"%>
@@ -36,7 +50,7 @@
 				<div id="bar"></div>
 			</div>
 		</div>
-		<div id="count">0 / <%= 160 - current_user.display_name.length %></div>
+		<div id="count">0 / <%= 158 - current_user.display_name.length %></div>
 	</h5></div>
 	</span>
     </div>
@@ -51,5 +65,3 @@
     </div>
   </div>
 <%end%>
-<div id="return_to_groups"></div>
-<span><%= link_to "< All Groups", groups_path %></span>

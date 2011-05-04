@@ -1,0 +1,6 @@
+$("#edit_group").hide();
+$("#group_name").replaceWith(" <a href='<%=group_url(@group)%>' class = 'white' id = 'group_name'> <%=@group.title%> </a>");
+$("#group_info span.title").replaceWith("<span class='title text_highlight'><%= @group.reload.title %></span>");
+$("#group_info span.left").replaceWith("<span class='left text_highlight'><%= @group.reload.description %></span>");
+$("#edit_group").replaceWith('<%=escape_javascript(render :partial => "ajax_form" )%>');
+$("#group_info").show();

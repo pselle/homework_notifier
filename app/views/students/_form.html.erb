@@ -11,13 +11,12 @@
 <% end %>
 <div class="field">
 <%= f.label :name %><br />
-<%= f.text_field :name, :class => 'membership_field' %>
+<%= f.text_field :name, :class => 'ajax_edit student' %>
 </div>
 <div class="field">
 <%= f.label :phone_number %><br />
-<%= f.text_field :phone_number, :class => 'membership_field' %>
+<%= f.text_field :phone_number, :class => 'ajax_edit number' %>
 </div>
 <% #TODO: groups/memberships%>
-<div class="right">
-  <%= f.submit "Save Member" %>
-</div>
+<%= link_to 'Cancel', group_path(@group), :class => "button secondary minor margin_top" %>
+<%= f.submit "Save", :class => 'button minor margin_top' %>

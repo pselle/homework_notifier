@@ -1,0 +1,7 @@
+<%= form_for @group, :html => {:id => 'edit_group', :style =>'display: none;'}, :remote => true do |f| %>
+	<%= hidden_field :group, :user_id, :value => current_user.id %>
+    <%= f.text_field :title, :class => 'ajax_edit title', :id => 'group_title'%>
+    <%= f.text_field :description, :class => 'ajax_edit description', :id => 'group_description'%>
+    <%= f.submit 'Save', :class=>"button minor"%>
+    <a href="#" id="edit_group_cancel" class="minor button secondary">Cancel</a>
+<% end %>

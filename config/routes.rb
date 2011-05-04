@@ -11,6 +11,7 @@ HomeworkNotifier::Application.routes.draw do
       #post "send_message", :as=>:send_message_to #possibly add in future
     end
   end
+  resources :students
 
   # devise_for :users
   devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', }, :controllers=>{:confirmations=>"confirmations"}, :skip=>:registrations do

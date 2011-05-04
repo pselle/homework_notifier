@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
   # GET /students.xml
   def index
     @students = @group.students
+    @student_update = "Now is the time."
 
     respond_to do |format|
       format.html # index.html.erb
@@ -64,6 +65,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.update_attributes(params[:student])
         format.html { redirect_to(group_students_url(@group), :notice => 'Student was successfully updated.') }
+        format.js
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -86,6 +88,10 @@ class StudentsController < ApplicationController
   
   private
   def load_group
+    if params[:group_id]
     @group = Group.find(params[:group_id])
+    elsif
+      @group = Group.find(params[:student][:group_id])
+    end
   end
 end

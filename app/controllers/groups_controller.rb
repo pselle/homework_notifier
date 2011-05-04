@@ -45,6 +45,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.new(params[:group])
     @group.phone_number = get_new_phone_number
     @page_title = "New Groups"
+    @group.description = "Click to add more info..."
 		
     respond_to do |format|
       if @group.save
@@ -72,7 +73,8 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.update_attributes(params[:group])
         @group.reload if @group.students.any?(&:marked_for_destruction?)
-        format.html { redirect_to(@group, :notice => 'Group was successfully updated.') }
+        format.html { redirect_to(@group) }
+        format.js
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

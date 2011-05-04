@@ -38,6 +38,6 @@
       <%= f.password_field :password_confirmation %>
     </div>
     <%= hidden_field_tag :confirmation_token,@confirmation_token %>
-    <p><%= f.submit "Activate" %></p>
+    <p><%= f.submit "Activate", :class => "button"%></p>
   </fieldset>
 <% end %>

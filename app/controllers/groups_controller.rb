@@ -99,24 +99,17 @@ class GroupsController < ApplicationController
     @group = current_user.groups.find(params[:id])
     message = @group.user.display_name+": "+params[:message][:content] #TODO: safety, parsing, whatever.
     #TODO: ensure group found
-    numbers = @group.students.map(&:phone_number)
-    numbers << @group.user.phone_number if @group.user.phone_number
     
-    numbers.each do |destination|
-      LoggedMessage.create(:group=>@group,:sender=>current_user,:destination_phone=>destination,:message=>message)
-    end
-      
     if params[:commit].match /scheduled/i
       time_zone = ActiveSupport::TimeZone["Eastern Time (US & Canada)"]  #use eastern time for the input
-      
       scheduled_run = time_zone.local(*params[:date].values_at(*%w{year month day hour}).map(&:to_i))
-      
+
       #schedule 5 minutes early so we don't accidentally hit anything silly on cron job execution time
-      $outbound_flocky.delay(:run_at=>scheduled_run-5.minutes).message @group.phone_number, message, numbers
+      @group.delay(:run_at=>scheduled_run-5.minutes).send_message(message,@group.user)
       pretty_time = scheduled_run.strftime("%A, %B %d, %I:%M %p %Z")
       redirect_to @group, :notice=>"Message successfully scheduled for #{pretty_time}" #if actually successful, or something
     else
-      response = $outbound_flocky.message @group.phone_number, message, numbers
+      @group.send_message(message,@group.user)
       redirect_to @group, :notice=>"Message sent successfully" #if actually successful, or something
     end
 
@@ -131,20 +124,15 @@ class GroupsController < ApplicationController
     if @group
       sent_by_admin=@group.user.phone_number==params[:origin_number]
       @sending_student = @group.students.find_by_phone_number(params[:origin_number])
-      if sent_by_admin || @sending_student
-        message = (sent_by_admin ? @group.user.display_name : @sending_student.name)+": "+params[:message]
-        numbers = (@group.students-[@sending_student]).map(&:phone_number)
+      @sending_person = sent_by_admin ? @group.user : @sending_student
       
-        numbers << @group.user.phone_number if @group.user.phone_number unless sent_by_admin
-        response = $outbound_flocky.message @group.phone_number, message, numbers
-        
-        numbers.each do |destination|
-          LoggedMessage.create(:group=>@group,:sender=>(sent_by_admin ? current_user : @sending_student),:source_phone=>params[:incoming_number],:destination_phone=>destination,:message=>message)
-        end
+      if @sending_person
+        message = (sent_by_admin ? @group.user.display_name : @sending_student.name)+": "+params[:message]
+        @group.send_message(message,@sending_person, sent_by_admin ? @group.students : [@group.user]) #if a student sent it, just send it to teacher. if teacher sent it, push to group
       end
     end
     
-    render :text=> response.to_json, :status=>202
+    render :text=>"sent", :status=>202
     #needs to return something API-like, yo
   end
   

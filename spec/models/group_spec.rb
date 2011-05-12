@@ -21,4 +21,15 @@ describe Group do
       @group.should be_valid
     end
   end
+  
+  describe "send_message" do
+    before :each do
+      @email_student=Factory.create(:student,:email=>"abc@def.com", :phone_number=>nil)
+      @group.students << @email_student
+    end
+    it "should send emails to users without phone numbers" do
+      NotificationMailer.should_receive(:notification_email).with(/test message/,@email_student,@group)
+      @group.send_message("test message",@group.user)
+    end
+  end
 end

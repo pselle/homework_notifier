@@ -22,7 +22,15 @@ describe Student do
       Factory.build(:student,:phone_number=>@student.phone_number,:group_id=>@student.group_id).should_not be_valid
     end
     
+    it "may be blank, if and only if an email is present" do
+      @student.phone_number = nil
+      @student.email = nil
+      @student.should_not be_valid
+      @student.email = "student@company.com"
+      @student.should be_valid
+    end
   end
+  
   describe "their name" do
     it "must be present" do
       Factory.build(:student,:name=>nil).should_not be_valid

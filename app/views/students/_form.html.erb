@@ -17,6 +17,10 @@
 <%= f.label :phone_number %><br />
 <%= f.text_field :phone_number, :class => 'ajax_edit number' %>
 </div>
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</div>
 <% #TODO: groups/memberships%>
 <%= link_to 'Cancel', group_path(@group), :class => "button secondary minor margin_top" %>
 <%= f.submit "Save", :class => 'button minor margin_top' %>

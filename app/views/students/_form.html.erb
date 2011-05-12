@@ -19,7 +19,7 @@
 </div>
 <div class="field">
   <%= f.label :email %><br />
-  <%= f.text_field :email %>
+  <%= f.text_field :email, :class => "ajax_edit" %>
 </div>
 <% #TODO: groups/memberships%>
 <%= link_to 'Cancel', group_path(@group), :class => "button secondary minor margin_top" %>

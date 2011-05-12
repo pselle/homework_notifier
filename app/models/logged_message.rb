@@ -10,6 +10,6 @@ class LoggedMessage < ActiveRecord::Base
   attr_readonly :source_phone, :destination_phone, :message #can't edit after the fact
   
   def self.unique_messages
-    group("message")
+    select("max(created_at) as created_at, message, count(*) as recipient_count").group("message")
   end
 end
